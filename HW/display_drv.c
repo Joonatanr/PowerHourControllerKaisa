@@ -12,7 +12,7 @@
 #include "register.h"
 #include "misc.h"
 
-#define ROTATE_180_DEGREES
+//#define ROTATE_180_DEGREES
 
 
 /*****************************************************************************************************
