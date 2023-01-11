@@ -10,9 +10,78 @@
 
 /* We control the potentiometer and indicator leds in this module. */
 
+/* Private type definitions */
+typedef struct
+{
+    U32 upper_range;
+    U32 lower_range;
+} pot_range_T;
 
+typedef struct
+{
+    uint8_t port;
+    uint16_t pin;
+} gpioConf_T;
+
+typedef struct
+{
+    gpioConf_T led1;
+    gpioConf_T led2;
+    gpioConf_T led3;
+    gpioConf_T led4;
+} indicatorLedConf_T;
+
+typedef struct
+{
+    /* GPIO */
+    gpioConf_T input;
+    indicatorLedConf_T leds;
+
+    /* ADC */
+    uint32_t adc_mem;
+    uint32_t adc_ch;
+
+    /* interrupt vector */
+    uint64_t intvec;
+} pot_conf_T;
+
+/* Private const definitions */
+
+Private const pot_conf_T priv_conf[NUMBER_OF_DEFINED_POTENTIOMETERS] =
+{
+ /* POTENTIOMETER_ONE */
+ {
+      .input = {.port = GPIO_PORT_P4, .pin = GPIO_PIN1 },
+      .leds =
+      {
+        .led1 = {.port = GPIO_PORT_P4, .pin = GPIO_PIN6 },
+        .led2 = {.port = GPIO_PORT_P3, .pin = GPIO_PIN3 },
+        .led3 = {.port = GPIO_PORT_P3, .pin = GPIO_PIN2 },
+        .led4 = {.port = GPIO_PORT_P6, .pin = GPIO_PIN0 },
+      },
+      .adc_mem = ADC_MEM12,
+      .adc_ch = ADC_INPUT_A12,
+      .intvec = ADC_INT12,
+ },
+
+ /* POTENTIOMETER_TWO */
+ {
+      .input = {.port = GPIO_PORT_P4, .pin = GPIO_PIN0 },
+      .leds =
+      {
+       .led1 = {.port = GPIO_PORT_P8, .pin = GPIO_PIN5 },
+       .led2 = {.port = GPIO_PORT_P9, .pin = GPIO_PIN0 },
+       .led3 = {.port = GPIO_PORT_P8, .pin = GPIO_PIN4 },
+       .led4 = {.port = GPIO_PORT_P8, .pin = GPIO_PIN2 },
+      },
+      .adc_mem = ADC_MEM13,
+      .adc_ch = ADC_INPUT_A13,
+      .intvec = ADC_INT13,
+ },
+};
 
 #define HYSTERESIS_VALUE 50u
+
 /* POT is connected to output 4.1 or A12 */
 
 /* POT_LED1 -> 4.6
@@ -21,12 +90,6 @@
  * POT_LED4 -> 6.0
  *
  */
-
-typedef struct
-{
-    U32 upper_range;
-    U32 lower_range;
-} pot_range_T;
 
 #define NUMBER_OF_POT_RANGES 4
 
@@ -39,21 +102,22 @@ Private const pot_range_T priv_pot_ranges[NUMBER_OF_POT_RANGES] =
      { .lower_range = 0u,                         .upper_range = 4095u  - HYSTERESIS_VALUE   }
 };
 
-static volatile uint16_t curADCResult = 0u;
-//static volatile float normalizedADCRes;
 
-Private void setPotLeds(int range);
-Private void setPotLed(int id, Boolean state);
-Private int currentRange = 0;
+
+/* Private variable declarations.*/
+Private volatile uint16_t curADCResult[NUMBER_OF_DEFINED_POTENTIOMETERS] = { 0u };
+Private volatile int currentRange[NUMBER_OF_DEFINED_POTENTIOMETERS] = { 0 };
+
+
+/* Private function forward declarations. */
+Private void setPotLeds(potentiometer_T pot, int range);
+Private void setPotLed(const gpioConf_T * gpio, Boolean state);
 
 
 Public void pot_init(void)
 {
-    /* Enable the LED pins as general purpose inouts. */
-    GPIO_setAsOutputPin(GPIO_PORT_P4, GPIO_PIN6);
-    GPIO_setAsOutputPin(GPIO_PORT_P3, GPIO_PIN3);
-    GPIO_setAsOutputPin(GPIO_PORT_P3, GPIO_PIN2);
-    GPIO_setAsOutputPin(GPIO_PORT_P6, GPIO_PIN0);
+    const pot_conf_T * pot_conf_ptr;
+    U8 ix;
 
     /* Enable the FPU for floating point operation. */
     FPU_enableModule();
@@ -63,24 +127,37 @@ Public void pot_init(void)
     ADC14_enableModule();
     ADC14_initModule(ADC_CLOCKSOURCE_MCLK, ADC_PREDIVIDER_1, ADC_DIVIDER_4, 0);
 
-    /* Configuring GPIOs (4.1 A12) */
-    GPIO_setAsPeripheralModuleFunctionInputPin(GPIO_PORT_P4, GPIO_PIN1,
-    GPIO_TERTIARY_MODULE_FUNCTION); /* NOTE!, IF DOESNT WORK, THEN TRY OTHER PRIMARY AND SECONDARY. */
+    /* Enable the LED pins as general purpose inouts. */
+    for (ix = 0u; ix < NUMBER_OF_DEFINED_POTENTIOMETERS; ix++)
+    {
+        pot_conf_ptr = &priv_conf[ix];
+        GPIO_setAsOutputPin(pot_conf_ptr->leds.led1.port, pot_conf_ptr->leds.led1.pin);
+        GPIO_setAsOutputPin(pot_conf_ptr->leds.led2.port, pot_conf_ptr->leds.led2.pin);
+        GPIO_setAsOutputPin(pot_conf_ptr->leds.led3.port, pot_conf_ptr->leds.led3.pin);
+        GPIO_setAsOutputPin(pot_conf_ptr->leds.led4.port, pot_conf_ptr->leds.led4.pin);
 
-    /* Configuring ADC Memory */
-    MAP_ADC14_configureSingleSampleMode(ADC_MEM12, true);
-    MAP_ADC14_configureConversionMemory(ADC_MEM12, ADC_VREFPOS_AVCC_VREFNEG_VSS,
-    ADC_INPUT_A12, false);
+        /* Configuring ADC inputs */
+        GPIO_setAsPeripheralModuleFunctionInputPin(pot_conf_ptr->input.port, pot_conf_ptr->input.pin,
+        GPIO_TERTIARY_MODULE_FUNCTION); /* NOTE!, IF DOESNT WORK, THEN TRY OTHER PRIMARY AND SECONDARY. */
+
+        /* Configuring ADC Memory */
+
+        MAP_ADC14_configureConversionMemory(pot_conf_ptr->adc_mem, ADC_VREFPOS_AVCC_VREFNEG_VSS,
+        pot_conf_ptr->adc_ch, false);
+
+        /* Enabling interrupts */
+        MAP_ADC14_enableInterrupt(pot_conf_ptr->intvec);
+    }
+
+    MAP_ADC14_configureMultiSequenceMode(ADC_MEM12, ADC_MEM13, true);
 
     /* Configuring Sample Timer */
     MAP_ADC14_enableSampleTimer(ADC_MANUAL_ITERATION);
 
     /* Enabling/Toggling Conversion */
     MAP_ADC14_enableConversion();
-    //MAP_ADC14_toggleConversionTrigger();
 
     /* Enabling interrupts */
-    MAP_ADC14_enableInterrupt(ADC_INT12);
     MAP_Interrupt_enableInterrupt(INT_ADC14);
     MAP_Interrupt_enableMaster();
 }
@@ -88,25 +165,31 @@ Public void pot_init(void)
 
 Public void pot_cyclic_10ms(void)
 {
-    float adc_value = curADCResult;
-    int measured_range = -1;
     U8 ix;
+    U8 pot_ix;
+    U16 adc_value;
+    int measured_range = -1;
 
-    for (ix = 0u; ix < NUMBER_OF_POT_RANGES; ix++)
+    for (pot_ix = 0u; pot_ix < NUMBER_OF_DEFINED_POTENTIOMETERS; pot_ix++)
     {
-        if (adc_value >= priv_pot_ranges[ix].lower_range && adc_value <= priv_pot_ranges[ix].upper_range)
+        adc_value = curADCResult[pot_ix];
+
+        for (ix = 0u; ix < NUMBER_OF_POT_RANGES; ix++)
         {
-            measured_range = ix;
-            break;
+            if (adc_value >= priv_pot_ranges[ix].lower_range && adc_value <= priv_pot_ranges[ix].upper_range)
+            {
+                measured_range = ix;
+                break;
+            }
         }
-    }
 
-    if (measured_range != -1)
-    {
-        currentRange = measured_range;
-    }
+        if (measured_range != -1)
+        {
+            currentRange[pot_ix] = measured_range;
+        }
 
-    setPotLeds(currentRange);
+        setPotLeds(pot_ix, currentRange[pot_ix]);
+    }
 
     MAP_ADC14_toggleConversionTrigger();
 }
@@ -114,7 +197,7 @@ Public void pot_cyclic_10ms(void)
 
 Public int pot_getSelectedRange()
 {
-    return currentRange;
+    return currentRange[0];
 }
 
 
@@ -123,89 +206,75 @@ Public int pot_getSelectedRange()
  */
 void ADC14_IRQHandler(void)
 {
+    U8 ix;
+
     uint64_t status = ADC14_getEnabledInterruptStatus();
     ADC14_clearInterruptFlag(status);
 
-    if (ADC_INT12 & status)
+    for (ix = 0u; ix < NUMBER_OF_DEFINED_POTENTIOMETERS; ix++)
     {
-        curADCResult = MAP_ADC14_getResult(ADC_MEM12);
+        if (priv_conf[ix].intvec & status)
+        {
+            curADCResult[ix] = MAP_ADC14_getResult(priv_conf[ix].adc_mem);
+        }
     }
 }
 
 
-Private void setPotLeds(int range)
+Private void setPotLeds(potentiometer_T pot, int range)
 {
-    switch(range)
+    const pot_conf_T * conf_ptr;
+
+    if (pot < NUMBER_OF_DEFINED_POTENTIOMETERS)
     {
-        case 0:
-            setPotLed(0, TRUE);
-            setPotLed(1, FALSE);
-            setPotLed(2, FALSE);
-            setPotLed(3, FALSE);
-            break;
-        case 1:
-            setPotLed(0, TRUE);
-            setPotLed(1, TRUE);
-            setPotLed(2, FALSE);
-            setPotLed(3, FALSE);
-            break;
-        case 2:
-            setPotLed(0, TRUE);
-            setPotLed(1, TRUE);
-            setPotLed(2, TRUE);
-            setPotLed(3, FALSE);
-            break;
-        case 3:
-            setPotLed(0, TRUE);
-            setPotLed(1, TRUE);
-            setPotLed(2, TRUE);
-            setPotLed(3, TRUE);
-            break;
-        default:
-            break;
+        conf_ptr = &priv_conf[pot];
+
+
+        switch(range)
+        {
+            case 0:
+                setPotLed(&conf_ptr->leds.led1, TRUE);
+                setPotLed(&conf_ptr->leds.led2, FALSE);
+                setPotLed(&conf_ptr->leds.led3, FALSE);
+                setPotLed(&conf_ptr->leds.led4, FALSE);
+                break;
+            case 1:
+                setPotLed(&conf_ptr->leds.led1, TRUE);
+                setPotLed(&conf_ptr->leds.led2, TRUE);
+                setPotLed(&conf_ptr->leds.led3, FALSE);
+                setPotLed(&conf_ptr->leds.led4, FALSE);
+                break;
+            case 2:
+                setPotLed(&conf_ptr->leds.led1, TRUE);
+                setPotLed(&conf_ptr->leds.led2, TRUE);
+                setPotLed(&conf_ptr->leds.led3, TRUE);
+                setPotLed(&conf_ptr->leds.led4, FALSE);
+                break;
+            case 3:
+                setPotLed(&conf_ptr->leds.led1, TRUE);
+                setPotLed(&conf_ptr->leds.led2, TRUE);
+                setPotLed(&conf_ptr->leds.led3, TRUE);
+                setPotLed(&conf_ptr->leds.led4, TRUE);
+                break;
+            default:
+                break;
+        }
     }
 }
 
 
-Private void setPotLed(int id, Boolean state)
+Private void setPotLed(const gpioConf_T * gpio, Boolean state)
 {
-    uint32_t port;
-    uint32_t pins;
-
-
-    switch(id)
+    if (gpio != NULL)
     {
-        case 0u:
-            port = GPIO_PORT_P4;
-            pins = GPIO_PIN6;
-            break;
-        case 3u:
-            port = GPIO_PORT_P3;
-            pins = GPIO_PIN3;
-            break;
-        case 1u:
-            port = GPIO_PORT_P3;
-            pins = GPIO_PIN2;
-            break;
-        case 2u:
-            port = GPIO_PORT_P6;
-            pins = GPIO_PIN0;
-            break;
-        default:
-         /* Should not happen. */
-         return;
-    }
-
-    if (state)
-    {
-        GPIO_setOutputHighOnPin(port, pins);
-    }
-    else
-    {
-        GPIO_setOutputLowOnPin(port, pins);
+        if (state)
+        {
+            GPIO_setOutputHighOnPin(gpio->port, gpio->pin);
+        }
+        else
+        {
+            GPIO_setOutputLowOnPin(gpio->port, gpio->pin);
+        }
     }
 }
-
-
-
 

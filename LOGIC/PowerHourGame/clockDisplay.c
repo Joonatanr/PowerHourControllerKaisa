@@ -11,7 +11,7 @@
 #include <LOGIC/PowerHourGame/SpecialTasks.h>
 #include "display_drv.h"
 #include "buzzer.h"
-#include "tumbler.h"
+//#include "tumbler.h"
 #include "register.h"
 #include "buttons.h"
 #include "LOGIC/TextTools/MessageBox.h"
@@ -100,7 +100,6 @@ typedef struct
 {
     const ControllerEvent * event_array;
     U8                        event_cnt;
-    Tumbler_T             enable_tumblr;
 } SchedulerTaskConf_T;
 
 typedef struct
@@ -266,14 +265,14 @@ Private const ControllerEvent priv_soc_drink_events[] =
  * as links to their respective actions. */
 Private const SchedulerTaskConf_T priv_scheduler_conf[NUMBER_OF_TASK_CATEGORIES] =
 {
-     {.event_array = priv_girls_drink_events,   .event_cnt = NUMBER_OF_ITEMS(priv_girls_drink_events),  .enable_tumblr = TUMBLER_UPPER_2  },       /*TASK_CATEGORY_GIRLS     */
-     {.event_array = priv_guys_drink_events,    .event_cnt = NUMBER_OF_ITEMS(priv_guys_drink_events),   .enable_tumblr = TUMBLER_UPPER_3  },       /*TASK_CATEGORY_GUYS      */
-     {.event_array = priv_board_drink_events,   .event_cnt = NUMBER_OF_ITEMS(priv_board_drink_events),  .enable_tumblr = TUMBLER_UPPER_0  },       /*TASK_CATEGORY_BOARD     */
-     {.event_array = priv_cteam_drink_events,   .event_cnt = NUMBER_OF_ITEMS(priv_cteam_drink_events),  .enable_tumblr = TUMBLER_UPPER_1  },       /*TASK_CATEGORY_CORETEAM  */
-     {.event_array = priv_alumni_drink_events,  .event_cnt = NUMBER_OF_ITEMS(priv_alumni_drink_events), .enable_tumblr = TUMBLER_LOWER_0  },       /*TASK_CATEGORY_ALUMNI    */
-     {.event_array = priv_pax_drink_events,     .event_cnt = NUMBER_OF_ITEMS(priv_pax_drink_events),    .enable_tumblr = TUMBLER_LOWER_1  },       /*TASK_CATEGORY_PAX       */
-     {.event_array = priv_kt_drink_events,      .event_cnt = NUMBER_OF_ITEMS(priv_kt_drink_events),     .enable_tumblr = TUMBLER_LOWER_2  },       /*TASK_CATEGORY_KT        */
-     {.event_array = priv_soc_drink_events,     .event_cnt = NUMBER_OF_ITEMS(priv_soc_drink_events),    .enable_tumblr = TUMBLER_LOWER_3  },       /*TASK_CATEGORY_SOC       */
+     {.event_array = priv_girls_drink_events,   .event_cnt = NUMBER_OF_ITEMS(priv_girls_drink_events)  },       /*TASK_CATEGORY_GIRLS     */
+     {.event_array = priv_guys_drink_events,    .event_cnt = NUMBER_OF_ITEMS(priv_guys_drink_events)   },       /*TASK_CATEGORY_GUYS      */
+     {.event_array = priv_board_drink_events,   .event_cnt = NUMBER_OF_ITEMS(priv_board_drink_events)  },       /*TASK_CATEGORY_BOARD     */
+     {.event_array = priv_cteam_drink_events,   .event_cnt = NUMBER_OF_ITEMS(priv_cteam_drink_events)  },       /*TASK_CATEGORY_CORETEAM  */
+     {.event_array = priv_alumni_drink_events,  .event_cnt = NUMBER_OF_ITEMS(priv_alumni_drink_events) },       /*TASK_CATEGORY_ALUMNI    */
+     {.event_array = priv_pax_drink_events,     .event_cnt = NUMBER_OF_ITEMS(priv_pax_drink_events)    },       /*TASK_CATEGORY_PAX       */
+     {.event_array = priv_kt_drink_events,      .event_cnt = NUMBER_OF_ITEMS(priv_kt_drink_events)     },       /*TASK_CATEGORY_KT        */
+     {.event_array = priv_soc_drink_events,     .event_cnt = NUMBER_OF_ITEMS(priv_soc_drink_events)    },       /*TASK_CATEGORY_SOC       */
 };
 
 Private SchedulerTaskState_T priv_scheduler_state[NUMBER_OF_TASK_CATEGORIES];
@@ -337,6 +336,7 @@ Public void clockDisplay_start(void)
     for (ix = 0u; ix < NUMBER_OF_TASK_CATEGORIES; ix++)
     {
         priv_scheduler_state[ix].counter = 0u;
+        priv_scheduler_state[ix].is_enabled = TRUE; /* In this version all tasks are always enabled. */
     }
 }
 
@@ -577,24 +577,7 @@ Private U8 getScheduledSpecialTask(const ControllerEvent ** event_ptr)
     U8 ix;
     U8 res;
 
-    Boolean is_any_enabled = FALSE;
-
-    /* First we have to check if we have any tasks enabled at all... */
-
-    for (ix = 0u; ix < NUMBER_OF_TASK_CATEGORIES; ix++)
-    {
-        if (tumbler_getState(priv_scheduler_conf[ix].enable_tumblr))
-        {
-            priv_scheduler_state[ix].is_enabled = TRUE;
-            is_any_enabled = TRUE;
-        }
-        else
-        {
-            priv_scheduler_state[ix].is_enabled = FALSE;
-        }
-    }
-
-    if (((priv_timekeeper.minute % priv_task_frequency) == 0u) && (is_any_enabled == TRUE))
+    if ((priv_timekeeper.minute % priv_task_frequency) == 0u)
     {
         ix = selectRandomTaskIndex();
         *event_ptr = priv_scheduler_conf[ix].event_array;

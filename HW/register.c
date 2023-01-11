@@ -14,7 +14,6 @@
 #include "speaker.h"
 #include "pot.h"
 #include <stdlib.h>
-#include "tumbler.h"
 
 //Hi priority timer runs at 10msec interval (might need to be faster)
 Private const Timer_A_UpModeConfig hi_prio_timer_config =
@@ -89,9 +88,6 @@ Public void register_init(void)
 
     //Initialize adc and potentiometer handler.
     pot_init();
-
-    //Initialize switch block.
-    tumbler_init();
 
     //Not quite sure what this does yet.
     //MAP_Interrupt_enableSleepOnIsrExit();

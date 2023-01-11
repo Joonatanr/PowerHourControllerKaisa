@@ -18,7 +18,6 @@
 #include "Scheduler.h"
 #include "speaker.h"
 #include "pot.h"
-#include "tumbler.h"
 
 /*  
 	P1.5 -> Spi CLK
@@ -151,24 +150,12 @@ Private void timer_hi_prio(void)
     pot_cyclic_10ms();
 }
 
-//For testing.
-Public volatile Boolean priv_tumbler_states[8u];
 
 //This is called every 50 milliseconds.
 Private void timer_lo_prio(void)
 {
     //Call the main scheduler for logic tasks.
     Scheduler_cyclic();
-
-    priv_tumbler_states[0] = tumbler_getState(TUMBLER_UPPER_0);
-    priv_tumbler_states[1] = tumbler_getState(TUMBLER_UPPER_1);
-    priv_tumbler_states[2] = tumbler_getState(TUMBLER_UPPER_2);
-    priv_tumbler_states[3] = tumbler_getState(TUMBLER_UPPER_3);
-    priv_tumbler_states[4] = tumbler_getState(TUMBLER_LOWER_0);
-    priv_tumbler_states[5] = tumbler_getState(TUMBLER_LOWER_1);
-    priv_tumbler_states[6] = tumbler_getState(TUMBLER_LOWER_2);
-    priv_tumbler_states[7] = tumbler_getState(TUMBLER_LOWER_3);
-
 }
 
 //#define BMP_TEST
