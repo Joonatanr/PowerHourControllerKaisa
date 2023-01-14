@@ -24,7 +24,7 @@ typedef enum
 
 extern void pot_init(void);
 extern void pot_cyclic_10ms(void);
-extern int pot_getSelectedRange(void);
+extern int pot_getSelectedRange(potentiometer_T pot);
 
 
 #endif /* HW_POT_H_ */

@@ -83,19 +83,6 @@ typedef struct
     OverrideFunc    func;           // Optional parameter - This function will override all behaviour, used for special actions.
 } ControllerEvent;
 
-typedef enum
-{
-    TASK_CATEGORY_GIRLS,
-    TASK_CATEGORY_GUYS,
-    TASK_CATEGORY_BOARD,
-    TASK_CATEGORY_CORETEAM,
-    TASK_CATEGORY_ALUMNI,
-    TASK_CATEGORY_PAX,
-    TASK_CATEGORY_KT,
-    TASK_CATEGORY_SOC,
-    NUMBER_OF_TASK_CATEGORIES
-} SchedulerTaskCategory;
-
 typedef struct
 {
     const ControllerEvent * event_array;
@@ -137,13 +124,8 @@ Private Boolean genericIntroFunction(const IntroSequence * intro_ptr, U8 sec);
 
 Private Boolean girlsSpecialIntro(U8 sec);
 Private Boolean guysSpecialIntro(U8 sec);
-
-Private Boolean alumniSpecialIntro(U8 sec);
-Private Boolean boardSpecialIntro(U8 sec);
-Private Boolean coreTeamSpecialIntro(U8 sec);
-Private Boolean ktSpecialIntro(U8 sec);
-Private Boolean paxSpecialIntro(U8 sec);
-Private Boolean SocRespSpecialIntro(U8 sec);
+Private Boolean EverybodySpecialIntro(U8 sec);
+Private Boolean KaisaSpecialIntro(U8 sec);
 
 
 Private void doFinalAction(void);
@@ -206,76 +188,40 @@ Private const ControllerEvent priv_guys_drink_events[] =
 Private const ControllerEvent priv_girls_drink_events[] =
 {
      { .second = 7u,  .upperText = "",              .lowerText = "",                    .shot_action = OVERRIDE_FUNCTION         , .func = &girlsSpecialIntro   },
-     { .second = 20u, .upperText = "Fill shots",    .lowerText = "Girls round",         .shot_action = BEERSHOT_BEGIN_FILLING    , .func = NULL },
+     { .second = 20u, .upperText = "Fill shots",    .lowerText = "Girls' round",         .shot_action = BEERSHOT_BEGIN_FILLING   , .func = NULL },
      { .second = 45u, .upperText = "Ready",         .lowerText = NULL,                  .shot_action = BEERSHOT_FULL             , .func = NULL },
      { .second = 59u, .upperText = "Proosit!",      .lowerText = "Cheers girls!",       .shot_action = OVERRIDE_FUNCTION         , .func = &girlsSpecialTask    },
 };
 
-Private const ControllerEvent priv_board_drink_events[] =
+Private const ControllerEvent priv_everybody_drink_events[] =
 {
-     { .second = 7u,  .upperText = "",              .lowerText = "",                    .shot_action = OVERRIDE_FUNCTION         , .func = boardSpecialIntro    },
-     { .second = 20u, .upperText = "Fill shots",    .lowerText = "Board Round",         .shot_action = BEERSHOT_BEGIN_FILLING    , .func = NULL                 },
-     { .second = 45u, .upperText = "Ready",         .lowerText = NULL,                  .shot_action = BEERSHOT_FULL             , .func = NULL                 },
-     { .second = 59u, .upperText = "Proosit!",      .lowerText = "Cheers boardies!",    .shot_action = OVERRIDE_FUNCTION         , .func = boardSpecialTask     },
+     { .second = 7u,  .upperText = "",              .lowerText = "",                    .shot_action = OVERRIDE_FUNCTION         , .func = &EverybodySpecialIntro   },
+     { .second = 20u, .upperText = "Fill shots",    .lowerText = "Task for all",        .shot_action = BEERSHOT_BEGIN_FILLING    , .func = NULL },
+     { .second = 45u, .upperText = "Ready",         .lowerText = NULL,                  .shot_action = BEERSHOT_FULL             , .func = NULL },
+     { .second = 59u, .upperText = "Proosit!",      .lowerText = "Cheers!",             .shot_action = OVERRIDE_FUNCTION         , .func = &everybodySpecialTask    },
 };
 
-Private const ControllerEvent priv_cteam_drink_events[] =
+Private const ControllerEvent priv_kaisa_drink_events[] =
 {
-     { .second = 7u,  .upperText = "",              .lowerText = "",                    .shot_action = OVERRIDE_FUNCTION         , .func = coreTeamSpecialIntro },
-     { .second = 20u, .upperText = "Fill shots",    .lowerText = "CTeam Round",         .shot_action = BEERSHOT_BEGIN_FILLING    , .func = NULL                 },
-     { .second = 45u, .upperText = "Ready",         .lowerText = NULL,                  .shot_action = BEERSHOT_FULL             , .func = NULL                 },
-     { .second = 59u, .upperText = "Proosit!",      .lowerText = "Cheers Core Team!",   .shot_action = OVERRIDE_FUNCTION         , .func = coreTeamSpecialTask  },
-};
-
-Private const ControllerEvent priv_alumni_drink_events[] =
-{
-     { .second = 7u,  .upperText = "",              .lowerText = "",                    .shot_action = OVERRIDE_FUNCTION         , .func = alumniSpecialIntro   },
-     { .second = 20u, .upperText = "Fill shots",    .lowerText = "Alumni Round",        .shot_action = BEERSHOT_BEGIN_FILLING    , .func = NULL                 },
-     { .second = 45u, .upperText = "Ready",         .lowerText = NULL,                  .shot_action = BEERSHOT_FULL             , .func = NULL                 },
-     { .second = 59u, .upperText = "Proosit!",      .lowerText = "Cheers Alumni!",      .shot_action = OVERRIDE_FUNCTION         , .func = alumniSpecialTask    },
-};
-
-Private const ControllerEvent priv_pax_drink_events[] =
-{
-     { .second = 7u,  .upperText = "",              .lowerText = "",                    .shot_action = OVERRIDE_FUNCTION         , .func = paxSpecialIntro      },
-     { .second = 20u, .upperText = "Fill shots",    .lowerText = "PAX Round",           .shot_action = BEERSHOT_BEGIN_FILLING    , .func = NULL                 },
-     { .second = 45u, .upperText = "Ready",         .lowerText = NULL,                  .shot_action = BEERSHOT_FULL             , .func = NULL                 },
-     { .second = 59u, .upperText = "Proosit!",      .lowerText = "Cheers PAX!",         .shot_action = OVERRIDE_FUNCTION         , .func = PaxSpecialTask       },
-};
-
-Private const ControllerEvent priv_kt_drink_events[] =
-{
-     { .second = 7u,  .upperText = "",              .lowerText = "",                    .shot_action = OVERRIDE_FUNCTION         , .func = ktSpecialIntro       },
-     { .second = 20u, .upperText = "Fill shots",    .lowerText = "KT Round",            .shot_action = BEERSHOT_BEGIN_FILLING    , .func = NULL                 },
-     { .second = 45u, .upperText = "Ready",         .lowerText = NULL,                  .shot_action = BEERSHOT_FULL             , .func = NULL                 },
-     { .second = 59u, .upperText = "Proosit!",      .lowerText = "Paragrahv 5!",        .shot_action = OVERRIDE_FUNCTION         , .func = KtSpecialTask        },
-};
-
-Private const ControllerEvent priv_soc_drink_events[] =
-{
-     { .second = 7u,  .upperText = "",              .lowerText = "",                    .shot_action = OVERRIDE_FUNCTION         , .func = SocRespSpecialIntro  },
-     { .second = 20u, .upperText = "Fill shots",    .lowerText = "SocResp Round",       .shot_action = BEERSHOT_BEGIN_FILLING    , .func = NULL                 },
-     { .second = 45u, .upperText = "Ready",         .lowerText = NULL,                  .shot_action = BEERSHOT_FULL             , .func = NULL                 },
-     { .second = 59u, .upperText = "Proosit!",      .lowerText = "Cheers Soc!",         .shot_action = OVERRIDE_FUNCTION         , .func = socRespSpecialTask   },
+     { .second = 7u,  .upperText = "",              .lowerText = "",                    .shot_action = OVERRIDE_FUNCTION         , .func = &KaisaSpecialIntro       },
+     { .second = 20u, .upperText = "Fill shots",    .lowerText = "Task for Kaisa!",      .shot_action = BEERSHOT_BEGIN_FILLING   , .func = NULL },
+     { .second = 45u, .upperText = "Ready",         .lowerText = NULL,                  .shot_action = BEERSHOT_FULL             , .func = NULL },
+     { .second = 59u, .upperText = "Proosit!",      .lowerText = "Cheers!",             .shot_action = OVERRIDE_FUNCTION         , .func = &kaisaSpecialTask        },
 };
 
 
 /* This is a scheduler for special minutes.
  * It contains data about the frequency and offset of special minutes as well
  * as links to their respective actions. */
-Private const SchedulerTaskConf_T priv_scheduler_conf[NUMBER_OF_TASK_CATEGORIES] =
+Private const SchedulerTaskConf_T priv_scheduler_conf[NUMBER_OF_TASK_TYPES] =
 {
-     {.event_array = priv_girls_drink_events,   .event_cnt = NUMBER_OF_ITEMS(priv_girls_drink_events)  },       /*TASK_CATEGORY_GIRLS     */
-     {.event_array = priv_guys_drink_events,    .event_cnt = NUMBER_OF_ITEMS(priv_guys_drink_events)   },       /*TASK_CATEGORY_GUYS      */
-     {.event_array = priv_board_drink_events,   .event_cnt = NUMBER_OF_ITEMS(priv_board_drink_events)  },       /*TASK_CATEGORY_BOARD     */
-     {.event_array = priv_cteam_drink_events,   .event_cnt = NUMBER_OF_ITEMS(priv_cteam_drink_events)  },       /*TASK_CATEGORY_CORETEAM  */
-     {.event_array = priv_alumni_drink_events,  .event_cnt = NUMBER_OF_ITEMS(priv_alumni_drink_events) },       /*TASK_CATEGORY_ALUMNI    */
-     {.event_array = priv_pax_drink_events,     .event_cnt = NUMBER_OF_ITEMS(priv_pax_drink_events)    },       /*TASK_CATEGORY_PAX       */
-     {.event_array = priv_kt_drink_events,      .event_cnt = NUMBER_OF_ITEMS(priv_kt_drink_events)     },       /*TASK_CATEGORY_KT        */
-     {.event_array = priv_soc_drink_events,     .event_cnt = NUMBER_OF_ITEMS(priv_soc_drink_events)    },       /*TASK_CATEGORY_SOC       */
+     {  .event_array = priv_girls_drink_events,     .event_cnt = NUMBER_OF_ITEMS(priv_girls_drink_events)       },  /*   TASK_FOR_GIRLS        */
+     {  .event_array = priv_guys_drink_events,      .event_cnt = NUMBER_OF_ITEMS(priv_guys_drink_events)        },  /*   TASK_FOR_GUYS         */
+     {  .event_array = priv_everybody_drink_events, .event_cnt = NUMBER_OF_ITEMS(priv_everybody_drink_events)   },  /*   TASK_FOR_EVERYONE     */
+     {  .event_array = priv_kaisa_drink_events,     .event_cnt = NUMBER_OF_ITEMS(priv_kaisa_drink_events)       },  /*   TASK_FOR_KAISA        */
 };
 
-Private SchedulerTaskState_T priv_scheduler_state[NUMBER_OF_TASK_CATEGORIES];
+Private SchedulerTaskState_T priv_scheduler_state[NUMBER_OF_TASK_TYPES];
 
 Private beershotState priv_beer_state;
 Private Rectangle priv_timer_rect;
@@ -333,7 +279,7 @@ Public void clockDisplay_start(void)
     priv_isFirstRun = TRUE;
     priv_state = CONTROLLER_WARNING_TEXT;
 
-    for (ix = 0u; ix < NUMBER_OF_TASK_CATEGORIES; ix++)
+    for (ix = 0u; ix < NUMBER_OF_TASK_TYPES; ix++)
     {
         priv_scheduler_state[ix].counter = 0u;
         priv_scheduler_state[ix].is_enabled = TRUE; /* In this version all tasks are always enabled. */
@@ -601,11 +547,11 @@ Private U8 selectRandomTaskIndex(void)
     U8 ix;
     U8 res = 0u;
 
-    U8 index_array[NUMBER_OF_TASK_CATEGORIES];
+    U8 index_array[NUMBER_OF_TASK_TYPES];
     U8 index_length = 0u;
 
     /* Lets first establish the MAX and MIN count that we have. */
-    for (ix = 0u; ix < NUMBER_OF_TASK_CATEGORIES; ix++)
+    for (ix = 0u; ix < NUMBER_OF_TASK_TYPES; ix++)
     {
         if (priv_scheduler_state[ix].is_enabled)
         {
@@ -617,7 +563,7 @@ Private U8 selectRandomTaskIndex(void)
     if (max_count == min_count)
     {
         /* We have no preference in this case. We add all indexes that are enabled to the array. */
-        for (ix = 0u; ix < NUMBER_OF_TASK_CATEGORIES; ix++)
+        for (ix = 0u; ix < NUMBER_OF_TASK_TYPES; ix++)
         {
             if (priv_scheduler_state[ix].is_enabled)
             {
@@ -631,7 +577,7 @@ Private U8 selectRandomTaskIndex(void)
     else
     {
         /* We prefer tasks that have not been selected yet. */
-        for (ix = 0u; ix < NUMBER_OF_TASK_CATEGORIES; ix++)
+        for (ix = 0u; ix < NUMBER_OF_TASK_TYPES; ix++)
         {
             if (priv_scheduler_state[ix].is_enabled && (priv_scheduler_state[ix].counter < max_count))
             {
@@ -792,154 +738,54 @@ Private Boolean girlsSpecialIntro(U8 sec)
     return genericIntroFunction(intro_ptr, sec);
 }
 
-Private const IntroSequence priv_alumni_intros[] =
+Private Boolean EverybodySpecialIntro(U8 sec)
 {
-     { .bmp_ptr = &alumni1_bitmap,  .bmp_x = 0u, .bmp_y = 0u, .text_str = "Alumni round!", .text_x = 4u , .text_y = 40u, .text_font = FONT_MEDIUM_FONT , .isInverted = TRUE },
-     { .bmp_ptr = &alumni2_bitmap,  .bmp_x = 0u, .bmp_y = 0u, .text_str = "Alumni round!", .text_x = 40u, .text_y = 4u,  .text_font = FONT_MEDIUM_FONT , .isInverted = TRUE },
-     { .bmp_ptr = &alumni3_bitmap,  .bmp_x = 0u, .bmp_y = 0u, .text_str = "Alumni round!", .text_x = 40u, .text_y = 4u,  .text_font = FONT_MEDIUM_FONT , .isInverted = TRUE },
-};
+    /* TODO : This is a placeholder. */
 
+    Boolean res = FALSE;
 
-Private Boolean alumniSpecialIntro(U8 sec)
-{
-    static const IntroSequence * intro_ptr = &priv_alumni_intros[0];
-    static U8 intro_ix;
-
-    if (sec == 1u)
+    switch(sec)
     {
-        intro_ptr = &priv_alumni_intros[intro_ix];
-        intro_ix++;
-        if (intro_ix >= NUMBER_OF_ITEMS(priv_alumni_intros))
-        {
-            intro_ix = 0u;
-        }
+    case(1u):
+        display_clear();
+        display_drawStringCenter("Task for Everybody", 32, 20, FONT_LARGE_FONT, FALSE);
+        break;
+    case(2u):
+        display_drawStringCenter("At end of round", 32, 40, FONT_LARGE_FONT, FALSE);
+        break;
+    case(10u):
+        res = TRUE;
+    break;
+    default:
+        break;
     }
 
-    return genericIntroFunction(intro_ptr, sec);
+    return res;
 }
 
-Private const IntroSequence priv_board_intros[] =
+Private Boolean KaisaSpecialIntro(U8 sec)
 {
-     { .bmp_ptr = &board1_bitmap,  .bmp_x = 0u, .bmp_y = 0u, .text_str = "Board round!", .text_x = 40u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = TRUE },
-     { .bmp_ptr = &board2_bitmap,  .bmp_x = 0u, .bmp_y = 0u, .text_str = "Board round!", .text_x = 40u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = TRUE },
-};
+    /* TODO : This is a placeholder. */
 
+    Boolean res = FALSE;
 
-Private Boolean boardSpecialIntro(U8 sec)
-{
-    static const IntroSequence * intro_ptr = &priv_board_intros[0];
-    static U8 intro_ix;
-
-    if (sec == 1u)
+    switch(sec)
     {
-        intro_ptr = &priv_board_intros[intro_ix];
-        intro_ix++;
-        if (intro_ix >= NUMBER_OF_ITEMS(priv_board_intros))
-        {
-            intro_ix = 0u;
-        }
+    case(1u):
+        display_clear();
+        display_drawStringCenter("Task for Kaisa", 32, 20, FONT_LARGE_FONT, FALSE);
+        break;
+    case(2u):
+        display_drawStringCenter("At end of round", 32, 40, FONT_LARGE_FONT, FALSE);
+        break;
+    case(10u):
+        res = TRUE;
+    break;
+    default:
+        break;
     }
 
-    return genericIntroFunction(intro_ptr, sec);
-}
-
-Private const IntroSequence priv_coreteam_intros[] =
-{
-     { .bmp_ptr = &coreteam1_bitmap,  .bmp_x = 0u, .bmp_y = 0u, .text_str = "Core Team round!", .text_x = 20u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = TRUE },
-};
-
-Private Boolean coreTeamSpecialIntro(U8 sec)
-{
-    static const IntroSequence * intro_ptr = &priv_coreteam_intros[0];
-    static U8 intro_ix;
-
-    if (sec == 1u)
-    {
-        intro_ptr = &priv_coreteam_intros[intro_ix];
-        intro_ix++;
-        if (intro_ix >= NUMBER_OF_ITEMS(priv_coreteam_intros))
-        {
-            intro_ix = 0u;
-        }
-    }
-
-    return genericIntroFunction(intro_ptr, sec);
-}
-
-Private const IntroSequence priv_kt_intros[] =
-{
-     { .bmp_ptr = &kt1_bitmap,  .bmp_x = 0u, .bmp_y = 0u, .text_str = "KT round!", .text_x = 40u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = TRUE },
-     { .bmp_ptr = &kt2_bitmap,  .bmp_x = 0u, .bmp_y = 0u, .text_str = "KT round!", .text_x = 40u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = TRUE },
-};
-
-
-Private Boolean ktSpecialIntro(U8 sec)
-{
-    static const IntroSequence * intro_ptr = &priv_kt_intros[0];
-    static U8 intro_ix;
-
-    if (sec == 1u)
-    {
-        intro_ptr = &priv_kt_intros[intro_ix];
-        intro_ix++;
-        if (intro_ix >= NUMBER_OF_ITEMS(priv_kt_intros))
-        {
-            intro_ix = 0u;
-        }
-    }
-
-    return genericIntroFunction(intro_ptr, sec);
-}
-
-Private const IntroSequence priv_pax_intros[] =
-{
-     { .bmp_ptr = &pax1_bitmap,  .bmp_x = 0u, .bmp_y = 0u, .text_str = "Pax round!", .text_x = 30u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = TRUE },
-     { .bmp_ptr = &pax2_bitmap,  .bmp_x = 0u, .bmp_y = 0u, .text_str = "Pax round!", .text_x = 40u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = TRUE },
-     { .bmp_ptr = &pax3_bitmap,  .bmp_x = 0u, .bmp_y = 0u, .text_str = "Pax round!", .text_x = 40u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = TRUE },
-};
-
-
-Private Boolean paxSpecialIntro(U8 sec)
-{
-    static const IntroSequence * intro_ptr = &priv_pax_intros[0];
-    static U8 intro_ix;
-
-    if (sec == 1u)
-    {
-        intro_ptr = &priv_pax_intros[intro_ix];
-        intro_ix++;
-        if (intro_ix >= NUMBER_OF_ITEMS(priv_pax_intros))
-        {
-            intro_ix = 0u;
-        }
-    }
-
-    return genericIntroFunction(intro_ptr, sec);
-}
-
-Private const IntroSequence priv_socresp_intros[] =
-{
-     { .bmp_ptr = &socresp1_bitmap,  .bmp_x = 0u, .bmp_y = 0u, .text_str = "Social Resp. Round!", .text_x = 20u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = TRUE },
-     { .bmp_ptr = &socresp2_bitmap,  .bmp_x = 0u, .bmp_y = 0u, .text_str = "Social Resp. Round!", .text_x = 40u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = TRUE },
-};
-
-
-Private Boolean SocRespSpecialIntro(U8 sec)
-{
-    static const IntroSequence * intro_ptr = &priv_socresp_intros[0];
-    static U8 intro_ix;
-
-    if (sec == 1u)
-    {
-        intro_ptr = &priv_socresp_intros[intro_ix];
-        intro_ix++;
-        if (intro_ix >= NUMBER_OF_ITEMS(priv_socresp_intros))
-        {
-            intro_ix = 0u;
-        }
-    }
-
-    return genericIntroFunction(intro_ptr, sec);
+    return res;
 }
 
 

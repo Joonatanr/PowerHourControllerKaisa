@@ -256,9 +256,16 @@ Public void pot_cyclic_10ms(void)
 }
 
 
-Public int pot_getSelectedRange()
+Public int pot_getSelectedRange(potentiometer_T pot)
 {
-    return currentRange[0];
+    if(pot < NUMBER_OF_DEFINED_POTENTIOMETERS)
+    {
+        return currentRange[pot];
+    }
+    else
+    {
+        return -1;
+    }
 }
 
 
