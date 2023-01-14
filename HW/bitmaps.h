@@ -50,4 +50,7 @@ extern const Bitmap test_palmtree_bmp;
 extern const Bitmap beershot_bmp;
 extern const Bitmap small_shot_bitmap;
 
+extern const Bitmap kaisa_bitmap;
+extern const Bitmap test_image_bitmap;
+
 #endif

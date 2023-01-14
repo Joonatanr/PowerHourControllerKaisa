@@ -166,7 +166,10 @@ Private void showStartScreen(void)
     display_clear();
 
 #ifdef BMP_TEST
-    display_drawBitmap(&girls2_bitmap, 0, 0, TRUE);
+    //display_drawBitmap(&girls2_bitmap, 0, 0, TRUE);
+    display_drawBitmap(&test_image_bitmap, 0, 0, TRUE);
+    delay_msec(12000);
+    display_drawBitmap(&kaisa_bitmap, 0, 0, TRUE);
     delay_msec(6000);
 #endif
 
