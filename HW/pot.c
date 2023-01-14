@@ -80,16 +80,64 @@ Private const pot_conf_T priv_conf[NUMBER_OF_DEFINED_POTENTIOMETERS] =
  },
 
  /* POTENTIOMETER_THREE ->  port 4.5, A8    */
- /* TODO */
+ {
+      .input = {.port = GPIO_PORT_P4, .pin = GPIO_PIN5 },
+      .leds =
+      {
+       .led1 = {.port = GPIO_PORT_P8, .pin = GPIO_PIN6 },
+       .led2 = {.port = GPIO_PORT_P8, .pin = GPIO_PIN7 },
+       .led3 = {.port = GPIO_PORT_P9, .pin = GPIO_PIN1 },
+       .led4 = {.port = GPIO_PORT_P8, .pin = GPIO_PIN3 },
+      },
+      .adc_mem = ADC_MEM8,
+      .adc_ch = ADC_INPUT_A8,
+      .intvec = ADC_INT8,
+ },
 
  /* POTENTIOMETER_FOUR ->   port 4.4, A9    */
- /* TODO */
+ {
+      .input = {.port = GPIO_PORT_P4, .pin = GPIO_PIN4 },
+      .leds =
+      {
+       .led1 = {.port = GPIO_PORT_P6, .pin = GPIO_PIN2 },
+       .led2 = {.port = GPIO_PORT_P7, .pin = GPIO_PIN3 },
+       .led3 = {.port = GPIO_PORT_P7, .pin = GPIO_PIN1 },
+       .led4 = {.port = GPIO_PORT_P9, .pin = GPIO_PIN4 },
+      },
+      .adc_mem = ADC_MEM9,
+      .adc_ch = ADC_INPUT_A9,
+      .intvec = ADC_INT9,
+ },
 
  /* POTENTIOMETER_FIVE ->   port 4.2, A11   */
- /* TODO */
+ {
+      .input = {.port = GPIO_PORT_P4, .pin = GPIO_PIN2 },
+      .leds =
+      {
+       .led1 = {.port = GPIO_PORT_P5, .pin = GPIO_PIN3 },
+       .led2 = {.port = GPIO_PORT_P9, .pin = GPIO_PIN3 },
+       .led3 = {.port = GPIO_PORT_P6, .pin = GPIO_PIN3 },
+       .led4 = {.port = GPIO_PORT_P7, .pin = GPIO_PIN2 },
+      },
+      .adc_mem = ADC_MEM11,
+      .adc_ch = ADC_INPUT_A11,
+      .intvec = ADC_INT11,
+ },
 
  /* POTENTIOMETER_SIX  ->   port 6.1, A14   */
- /* TODO */
+ {
+      .input = {.port = GPIO_PORT_P6, .pin = GPIO_PIN1 },
+      .leds =
+      {
+       .led1 = {.port = GPIO_PORT_P7, .pin = GPIO_PIN0 },
+       .led2 = {.port = GPIO_PORT_P9, .pin = GPIO_PIN5 },
+       .led3 = {.port = GPIO_PORT_P9, .pin = GPIO_PIN7 },
+       .led4 = {.port = GPIO_PORT_P7, .pin = GPIO_PIN5 },
+      },
+      .adc_mem = ADC_MEM14,
+      .adc_ch = ADC_INPUT_A14,
+      .intvec = ADC_INT14,
+ },
 };
 
 #define HYSTERESIS_VALUE 50u
@@ -161,7 +209,7 @@ Public void pot_init(void)
         MAP_ADC14_enableInterrupt(pot_conf_ptr->intvec);
     }
 
-    MAP_ADC14_configureMultiSequenceMode(ADC_MEM12, ADC_MEM13, true);
+    MAP_ADC14_configureMultiSequenceMode(ADC_MEM8, ADC_MEM14, true);
 
     /* Configuring Sample Timer */
     MAP_ADC14_enableSampleTimer(ADC_MANUAL_ITERATION);
