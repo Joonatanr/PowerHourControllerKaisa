@@ -697,6 +697,8 @@ Private const IntroSequence priv_hot_guys_intros[] =
      {.bmp_ptr = &male_stripper1_bmp, .bmp_x = 32u, .bmp_y = 0u, .text_str = "Guys Round!", .text_x = 0u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = FALSE },
      {.bmp_ptr = &male_stripper2_bmp, .bmp_x = 32u, .bmp_y = 0u, .text_str = "Guys Round!", .text_x = 0u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = FALSE },
      {.bmp_ptr = &male_stripper3_bmp, .bmp_x = 32u, .bmp_y = 0u, .text_str = "Guys Round!", .text_x = 0u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = FALSE },
+     {.bmp_ptr = &male_stripper5_bmp, .bmp_x = 32u, .bmp_y = 0u, .text_str = "Guys Round!", .text_x = 0u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = FALSE },
+
 };
 
 

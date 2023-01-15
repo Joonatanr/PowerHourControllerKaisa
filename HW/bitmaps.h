@@ -62,6 +62,7 @@ extern const Bitmap test_image_bitmap;
 extern const Bitmap male_stripper1_bmp;
 extern const Bitmap male_stripper2_bmp;
 extern const Bitmap male_stripper3_bmp;
+extern const Bitmap male_stripper5_bmp;
 
 extern const Bitmap hot_girl1_bitmap;
 extern const Bitmap hot_girl2_bitmap;

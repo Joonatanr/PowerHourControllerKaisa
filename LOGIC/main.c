@@ -159,7 +159,7 @@ Private void timer_lo_prio(void)
 }
 
 //#define BMP_TEST
-#define HOT_BMP_TEST
+//#define HOT_BMP_TEST
 
 Private void showStartScreen(void)
 {
@@ -174,19 +174,20 @@ Private void showStartScreen(void)
 #endif
 
 #ifdef HOT_BMP_TEST
-    //display_drawBitmap(&male_stripper1_bmp, 0, 0, TRUE);
-    display_drawBitmap(&hot_girl1_bitmap, 0, 0, TRUE);
+    display_drawBitmap(&male_stripper1_bmp, 0, 0, TRUE);
+    //display_drawBitmap(&hot_girl1_bitmap, 0, 0, TRUE);
     delay_msec(10000);
     display_clear();
-    //display_drawBitmap(&male_stripper2_bmp, 0, 0, TRUE);
-    display_drawBitmap(&hot_girl2_bitmap, 0, 0, TRUE);
+    display_drawBitmap(&male_stripper2_bmp, 0, 0, TRUE);
+    //display_drawBitmap(&hot_girl2_bitmap, 0, 0, TRUE);
     delay_msec(10000);
     display_clear();
-    display_drawBitmap(&hot_girl3_bitmap, 0, 0, TRUE);
+    display_drawBitmap(&male_stripper5_bmp, 0, 0, TRUE);
+    //display_drawBitmap(&hot_girl3_bitmap, 0, 0, TRUE);
     delay_msec(10000);
     display_clear();
-    //display_drawBitmap(&male_stripper3_bmp, 0, 0, TRUE);
-    display_drawBitmap(&kiss_bitmap, 0, 0, TRUE);
+    display_drawBitmap(&male_stripper3_bmp, 0, 0, TRUE);
+    //display_drawBitmap(&kiss_bitmap, 0, 0, TRUE);
     delay_msec(10000);
     display_clear();
     display_drawBitmap(&kinky_bitmap, 0, 0, TRUE);
