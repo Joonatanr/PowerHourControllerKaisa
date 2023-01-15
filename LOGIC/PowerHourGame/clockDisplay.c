@@ -738,54 +738,50 @@ Private Boolean girlsSpecialIntro(U8 sec)
     return genericIntroFunction(intro_ptr, sec);
 }
 
+Private const IntroSequence priv_common_intros[] =
+{
+     { .bmp_ptr = &two_beers_prosit_bitmap, .bmp_x = 31u, .bmp_y = 0u, .text_str = "Task for all!", .text_x = 50u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = FALSE},
+};
+
 Private Boolean EverybodySpecialIntro(U8 sec)
 {
-    /* TODO : This is a placeholder. */
+    static const IntroSequence * intro_ptr = &priv_common_intros[0];
+    static U8 intro_ix;
 
-    Boolean res = FALSE;
-
-    switch(sec)
+    if (sec == 1u)
     {
-    case(1u):
-        display_clear();
-        display_drawStringCenter("Task for Everybody", 32, 20, FONT_LARGE_FONT, FALSE);
-        break;
-    case(2u):
-        display_drawStringCenter("At end of round", 32, 40, FONT_LARGE_FONT, FALSE);
-        break;
-    case(10u):
-        res = TRUE;
-    break;
-    default:
-        break;
+        intro_ptr = &priv_common_intros[intro_ix];
+        intro_ix++;
+        if (intro_ix >= NUMBER_OF_ITEMS(priv_common_intros))
+        {
+            intro_ix = 0u;
+        }
     }
 
-    return res;
+    return genericIntroFunction(intro_ptr, sec);
 }
+
+Private const IntroSequence priv_kaisa_intros[] =
+{
+     { .bmp_ptr = &kaisa_bitmap, .bmp_x = 31u, .bmp_y = 0u, .text_str = "Kaisa's round!", .text_x = 50u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = FALSE},
+};
 
 Private Boolean KaisaSpecialIntro(U8 sec)
 {
-    /* TODO : This is a placeholder. */
+    static const IntroSequence * intro_ptr = &priv_kaisa_intros[0];
+    static U8 intro_ix;
 
-    Boolean res = FALSE;
-
-    switch(sec)
+    if (sec == 1u)
     {
-    case(1u):
-        display_clear();
-        display_drawStringCenter("Task for Kaisa", 32, 20, FONT_LARGE_FONT, FALSE);
-        break;
-    case(2u):
-        display_drawStringCenter("At end of round", 32, 40, FONT_LARGE_FONT, FALSE);
-        break;
-    case(10u):
-        res = TRUE;
-    break;
-    default:
-        break;
+        intro_ptr = &priv_kaisa_intros[intro_ix];
+        intro_ix++;
+        if (intro_ix >= NUMBER_OF_ITEMS(priv_kaisa_intros))
+        {
+            intro_ix = 0u;
+        }
     }
 
-    return res;
+    return genericIntroFunction(intro_ptr, sec);
 }
 
 
