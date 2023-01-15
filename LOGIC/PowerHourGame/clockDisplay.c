@@ -749,7 +749,7 @@ Private const IntroSequence priv_hot_girls_intros[] =
      {.bmp_ptr = &kiss_bitmap,      .bmp_x = 10u, .bmp_y = 0u, .text_str = "Girls Round!", .text_x = 0u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = FALSE },
      {.bmp_ptr = &kinky_bitmap,     .bmp_x = 10u, .bmp_y = 0u, .text_str = "Girls Round!", .text_x = 0u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = FALSE },
      {.bmp_ptr = &kinky2_bitmap,    .bmp_x = 63u, .bmp_y = 0u, .text_str = "Girls Round!", .text_x = 0u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = FALSE },
-
+     {.bmp_ptr = &kiss2_bitmap,     .bmp_x = 28u, .bmp_y = 0u, .text_str = "Girls Round!", .text_x = 0u, .text_y = 50u,.text_font = FONT_MEDIUM_FONT , .isInverted = FALSE },
 };
 
 
