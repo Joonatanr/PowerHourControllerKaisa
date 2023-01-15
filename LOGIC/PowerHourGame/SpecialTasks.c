@@ -159,12 +159,41 @@ Private Task_T priv_TextArrayGuysLevel1[] =
      { "All guys whose" ,         "name starts with",     "S drinks 2x"       , .counter = 0u  , .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u}, /* 18 */
 };
 
-/* TODO : Placeholder. */
+/* Easy Tasks */
 Private Task_T priv_TextArrayAllLevel1[] =
 {
+/* Casual tasks : These should not contain any extra criteria. */
      {  NULL                    , "Everybody drink 2x",            NULL       , .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u    }, /* 1  */
-     {  NULL                    , "Everybody drink 2x",            NULL       , .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u    }, /* 2  */
-     {  NULL                    , "Everybody drink 2x",            NULL       , .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u    }, /* 3  */
+     {  "Everybody drinks"      , "without using",              "hands"       , .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u    }, /* 2  */
+     {  "Most sober person"     , "drinks 3x",                     NULL       , .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u    }, /* 3  */
+     {  "Grab your bottles"     , "and do a ",              "waterfall"       , .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u    }, /* 4  */
+     {  "Those in relationship" , "drink  2x",                     NULL       , .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u    }, /* 5  */
+     {  "Those who are single"  , "drink  2x",                     NULL       , .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u    }, /* 6  */
+     {  "Vodka round"           , "for everybody",                 NULL       , .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u    }, /* 7  */
+     {  "Who is closest to "    , "the machine must",    "tell dirty joke"    , .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u    },
+     {  "Everybody who is "     , "wearing sweaters",    "drink 2x"           , .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u    },
+     {  "Rock-Paper-Scissors "  , "tournament in 60 sec", "loser drinks vodka", .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u    },
+
+
+/* Tasks that need criteria. */
+     {  "Everyone takes off"     , "one sock",                     NULL       , .counter = 0u,  .nude_level = 1u, .sexy_level = 0u, .gay_level = 0u    },
+     {  "Those that have"        , "french-kissed today",    "drink 3x"       , .counter = 0u,  .nude_level = 0u, .sexy_level = 1u, .gay_level = 0u    },
+     {  "Everybody who has"      , "made out with Kaisa",    "drinks vodka"   , .counter = 0u,  .nude_level = 0u, .sexy_level = 1u, .gay_level = 0u    },
+     {  "One closest to machine" , "gets slapped on",        "the ass"        , .counter = 0u,  .nude_level = 0u, .sexy_level = 2u, .gay_level = 0u    },
+
+
+/* Strange cases, where somebody is playing on easy mode, but with maximum nudity. */
+     {  "Everyone takes off"     , "one item of",             "clothing"      , .counter = 0u,  .nude_level = 3u, .sexy_level = 0u, .gay_level = 0u   },
+     {  "Everyone takes off"     , "one item of",             "clothing"      , .counter = 0u,  .nude_level = 3u, .sexy_level = 0u, .gay_level = 0u   },
+     {  "Everyone takes off"     , "one item of",             "clothing"      , .counter = 0u,  .nude_level = 3u, .sexy_level = 0u, .gay_level = 0u   },
+     {  "Everyone takes off"     , "one item of",             "clothing"      , .counter = 0u,  .nude_level = 3u, .sexy_level = 0u, .gay_level = 0u   },
+
+/* Strange cases, where somebody is playing on easy mode, but with maximum sexyness */
+     {  "One closest to"         , "machine spins",         "the bottle"      , .counter = 0u,  .nude_level = 0u, .sexy_level = 3u, .gay_level = 0u   },
+     {  "Everybody finds"        , "somebody to",           "kiss"            , .counter = 0u,  .nude_level = 0u, .sexy_level = 3u, .gay_level = 0u   },
+
+/* Strange cases, where somebody is playing on easy mode, but with maximum gay */
+     {  "Guys drink vodka" ,       "Girls have to",         "kiss"            , .counter = 0u,  .nude_level = 0u, .sexy_level = 1u, .gay_level = 3u   },
 };
 
 /* TODO : Placeholder. */
