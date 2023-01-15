@@ -170,9 +170,9 @@ Private Task_T priv_TextArrayAllLevel1[] =
      {  "Those in relationship" , "drink  2x",                     NULL       , .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u    }, /* 5  */
      {  "Those who are single"  , "drink  2x",                     NULL       , .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u    }, /* 6  */
      {  "Vodka round"           , "for everybody",                 NULL       , .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u    }, /* 7  */
-     {  "Who is closest to "    , "the machine must",    "tell dirty joke"    , .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u    },
-     {  "Everybody who is "     , "wearing sweaters",    "drink 2x"           , .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u    },
-     {  "Rock-Paper-Scissors "  , "tournament in 60 sec", "loser drinks vodka", .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u    },
+     {  "Who is closest to "    , "the machine must",    "tell dirty joke"    , .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u    }, /* 8  */
+     {  "Everybody who is "     , "wearing sweaters",    "drink 2x"           , .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u    }, /* 9  */
+     {  "Rock-Paper-Scissors "  , "tournament in 60 sec", "loser drinks vodka", .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u    }, /* 10 */
 
 
 /* Tasks that need criteria. */
@@ -196,12 +196,23 @@ Private Task_T priv_TextArrayAllLevel1[] =
      {  "Guys drink vodka" ,       "Girls have to",         "kiss"            , .counter = 0u,  .nude_level = 0u, .sexy_level = 1u, .gay_level = 3u   },
 };
 
-/* TODO : Placeholder. */
+/* Easy tasks */
 Private Task_T priv_TextArrayKaisaLevel1[] =
 {
+/* Casual tasks : These should not contain any extra criteria. */
      {  NULL                    , "Kaisa drinks 2x",               NULL       , .counter = 0u, .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u    }, /* 1  */
-     {  NULL                    , "Kaisa drinks 2x",               NULL       , .counter = 0u, .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u    }, /* 2  */
+     {  "Kaisa must take"       , "vodka shot",                    NULL       , .counter = 0u, .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u    }, /* 2  */
      {  NULL                    , "Kaisa drinks 2x",               NULL       , .counter = 0u, .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u    }, /* 3  */
+
+/* Tasks that need criteria. */
+
+/* Strange cases, where somebody is playing on easy mode, but with maximum nudity. */
+     {  "Kaisa can confiscate"  , "one item of",             "clothing"       , .counter = 0u, .nude_level = 3u, .sexy_level = 0u, .gay_level = 0u    },
+     {  "Kaisa loses"           , "one item of",             "clothing"       , .counter = 0u, .nude_level = 3u, .sexy_level = 0u, .gay_level = 0u    },
+/* Strange cases, where somebody is playing on easy mode, but with maximum sexyness */
+/* TODO */
+/* Strange cases, where somebody is playing on easy mode, but with maximum gay */
+/* TODO */
 };
 
 /* Medium tasks */
