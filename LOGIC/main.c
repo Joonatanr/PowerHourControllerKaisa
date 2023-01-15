@@ -192,6 +192,9 @@ Private void showStartScreen(void)
     display_drawBitmap(&kinky_bitmap, 0, 0, TRUE);
     delay_msec(10000);
     display_clear();
+    display_drawBitmap(&kinky2_bitmap, 0, 0, TRUE);
+    delay_msec(10000);
+    display_clear();
 #endif
 
     display_drawStringCenter("Power Hour", 64u, 5u, FONT_LARGE_FONT, FALSE);

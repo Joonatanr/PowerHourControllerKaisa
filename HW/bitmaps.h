@@ -68,5 +68,6 @@ extern const Bitmap hot_girl2_bitmap;
 extern const Bitmap hot_girl3_bitmap;
 extern const Bitmap kiss_bitmap;
 extern const Bitmap kinky_bitmap;
+extern const Bitmap kinky2_bitmap;
 
 #endif
