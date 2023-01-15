@@ -16,6 +16,7 @@
 #include "buttons.h"
 #include "LOGIC/TextTools/MessageBox.h"
 #include "LOGIC/main.h"
+#include "pot.h"
 
 #define BEERSHOT_X 86
 #define BEERSHOT_Y 1
@@ -690,24 +691,62 @@ Private const IntroSequence priv_guys_intros[] =
      {.bmp_ptr = &dude4_bitmap,       .bmp_x = 0u, .bmp_y = 0u, .text_str = "Guys Round!", .text_x = 50u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = TRUE  },
 };
 
+/* These only to be used at maximum Sexyness level :D */
+Private const IntroSequence priv_hot_guys_intros[] =
+{
+     {.bmp_ptr = &male_stripper1_bmp, .bmp_x = 32u, .bmp_y = 0u, .text_str = "Guys Round!", .text_x = 0u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = FALSE },
+     {.bmp_ptr = &male_stripper2_bmp, .bmp_x = 32u, .bmp_y = 0u, .text_str = "Guys Round!", .text_x = 0u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = FALSE },
+     {.bmp_ptr = &male_stripper3_bmp, .bmp_x = 32u, .bmp_y = 0u, .text_str = "Guys Round!", .text_x = 0u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = FALSE },
+};
+
 
 Private Boolean guysSpecialIntro(U8 sec)
 {
     static const IntroSequence * intro_ptr = &priv_guys_intros[0];
+    static const IntroSequence * hot_intro_ptr = &priv_hot_guys_intros[0];
+
     static U8 intro_ix;
+    static U8 hot_intro_ix;
 
-    if (sec == 1u)
+    if (pot_getSelectedRange(POTENTIOMETER_SEXY_LEVEL) < 3)
     {
-        intro_ptr = &priv_guys_intros[intro_ix];
-        intro_ix++;
-        if (intro_ix >= NUMBER_OF_ITEMS(priv_guys_intros))
+        if (sec == 1u)
         {
-            intro_ix = 0u;
+            intro_ptr = &priv_guys_intros[intro_ix];
+            intro_ix++;
+            if (intro_ix >= NUMBER_OF_ITEMS(priv_guys_intros))
+            {
+                intro_ix = 0u;
+            }
         }
-    }
 
-    return genericIntroFunction(intro_ptr, sec);
+        return genericIntroFunction(intro_ptr, sec);
+    }
+    else
+    {
+        if (sec == 1u)
+        {
+            hot_intro_ptr = &priv_hot_guys_intros[hot_intro_ix];
+            hot_intro_ix++;
+            if (hot_intro_ix >= NUMBER_OF_ITEMS(priv_hot_guys_intros))
+            {
+                hot_intro_ix = 0u;
+            }
+        }
+
+        return genericIntroFunction(hot_intro_ptr, sec);
+    }
 }
+
+/* These only to be used at maximum Sexyness level :D */
+Private const IntroSequence priv_hot_girls_intros[] =
+{
+     {.bmp_ptr = &hot_girl1_bitmap, .bmp_x = 32u, .bmp_y = 0u, .text_str = "Girls Round!", .text_x = 0u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = FALSE },
+     {.bmp_ptr = &hot_girl2_bitmap, .bmp_x = 32u, .bmp_y = 0u, .text_str = "Girls Round!", .text_x = 0u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = FALSE },
+     {.bmp_ptr = &hot_girl3_bitmap, .bmp_x = 32u, .bmp_y = 0u, .text_str = "Girls Round!", .text_x = 0u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = FALSE },
+     {.bmp_ptr = &kiss_bitmap,      .bmp_x = 10u, .bmp_y = 0u, .text_str = "Girls Round!", .text_x = 0u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = FALSE },
+     {.bmp_ptr = &kinky_bitmap,     .bmp_x = 10u, .bmp_y = 0u, .text_str = "Girls Round!", .text_x = 0u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = FALSE },
+};
 
 
 Private const IntroSequence priv_girl_intros[] =
@@ -723,19 +762,39 @@ Private const IntroSequence priv_girl_intros[] =
 Private Boolean girlsSpecialIntro(U8 sec)
 {
     static const IntroSequence * intro_ptr = &priv_girl_intros[0];
+    static const IntroSequence * hot_intro_ptr = &priv_hot_girls_intros[0];
+
     static U8 intro_ix;
+    static U8 hot_intro_ix;
 
-    if (sec == 1u)
+    if (pot_getSelectedRange(POTENTIOMETER_SEXY_LEVEL) < 3)
     {
-        intro_ptr = &priv_girl_intros[intro_ix];
-        intro_ix++;
-        if (intro_ix >= NUMBER_OF_ITEMS(priv_girl_intros))
+        if (sec == 1u)
         {
-            intro_ix = 0u;
+            intro_ptr = &priv_girl_intros[intro_ix];
+            intro_ix++;
+            if (intro_ix >= NUMBER_OF_ITEMS(priv_girl_intros))
+            {
+                intro_ix = 0u;
+            }
         }
-    }
 
-    return genericIntroFunction(intro_ptr, sec);
+        return genericIntroFunction(intro_ptr, sec);
+    }
+    else
+    {
+        if (sec == 1u)
+        {
+            hot_intro_ptr = &priv_hot_girls_intros[hot_intro_ix];
+            hot_intro_ix++;
+            if (hot_intro_ix >= NUMBER_OF_ITEMS(priv_hot_girls_intros))
+            {
+                hot_intro_ix = 0u;
+            }
+        }
+
+        return genericIntroFunction(hot_intro_ptr, sec);
+    }
 }
 
 Private const IntroSequence priv_common_intros[] =

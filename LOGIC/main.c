@@ -159,7 +159,7 @@ Private void timer_lo_prio(void)
 }
 
 //#define BMP_TEST
-
+#define HOT_BMP_TEST
 
 Private void showStartScreen(void)
 {
@@ -171,6 +171,27 @@ Private void showStartScreen(void)
     //delay_msec(12000);
     display_drawBitmap(&kaisa_w_laudur_bitmap, 0, 0, TRUE);
     delay_msec(16000);
+#endif
+
+#ifdef HOT_BMP_TEST
+    //display_drawBitmap(&male_stripper1_bmp, 0, 0, TRUE);
+    display_drawBitmap(&hot_girl1_bitmap, 0, 0, TRUE);
+    delay_msec(10000);
+    display_clear();
+    //display_drawBitmap(&male_stripper2_bmp, 0, 0, TRUE);
+    display_drawBitmap(&hot_girl2_bitmap, 0, 0, TRUE);
+    delay_msec(10000);
+    display_clear();
+    display_drawBitmap(&hot_girl3_bitmap, 0, 0, TRUE);
+    delay_msec(10000);
+    display_clear();
+    //display_drawBitmap(&male_stripper3_bmp, 0, 0, TRUE);
+    display_drawBitmap(&kiss_bitmap, 0, 0, TRUE);
+    delay_msec(10000);
+    display_clear();
+    display_drawBitmap(&kinky_bitmap, 0, 0, TRUE);
+    delay_msec(10000);
+    display_clear();
 #endif
 
     display_drawStringCenter("Power Hour", 64u, 5u, FONT_LARGE_FONT, FALSE);

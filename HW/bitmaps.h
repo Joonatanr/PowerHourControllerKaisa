@@ -59,4 +59,14 @@ extern const Bitmap one_large_beer_bitmap;
 
 extern const Bitmap test_image_bitmap;
 
+extern const Bitmap male_stripper1_bmp;
+extern const Bitmap male_stripper2_bmp;
+extern const Bitmap male_stripper3_bmp;
+
+extern const Bitmap hot_girl1_bitmap;
+extern const Bitmap hot_girl2_bitmap;
+extern const Bitmap hot_girl3_bitmap;
+extern const Bitmap kiss_bitmap;
+extern const Bitmap kinky_bitmap;
+
 #endif
