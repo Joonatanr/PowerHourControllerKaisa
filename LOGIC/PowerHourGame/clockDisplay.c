@@ -741,6 +741,7 @@ Private Boolean girlsSpecialIntro(U8 sec)
 Private const IntroSequence priv_common_intros[] =
 {
      { .bmp_ptr = &two_beers_prosit_bitmap, .bmp_x = 31u, .bmp_y = 0u, .text_str = "Task for all!", .text_x = 50u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = FALSE},
+     { .bmp_ptr = &one_large_beer_bitmap,   .bmp_x = 34u, .bmp_y = 0u, .text_str = "Task for all!", .text_x = 50u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = FALSE},
 };
 
 Private Boolean EverybodySpecialIntro(U8 sec)
@@ -763,7 +764,11 @@ Private Boolean EverybodySpecialIntro(U8 sec)
 
 Private const IntroSequence priv_kaisa_intros[] =
 {
-     { .bmp_ptr = &kaisa_bitmap, .bmp_x = 31u, .bmp_y = 0u, .text_str = "Kaisa's round!", .text_x = 50u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = FALSE},
+     { .bmp_ptr = &kaisa_bitmap,            .bmp_x = 61u, .bmp_y = 0u, .text_str = "Kaisa's round!", .text_x = 50u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = FALSE},
+     { .bmp_ptr = &kaisa_message_bitmap,    .bmp_x = 41u, .bmp_y = 0u, .text_str = "Kaisa's round!", .text_x = 50u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = FALSE},
+     { .bmp_ptr = &kaisa_w_laudur_bitmap,   .bmp_x = 33u, .bmp_y = 0u, .text_str = "Kaisa's round!", .text_x = 50u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = FALSE},
+
+
 };
 
 Private Boolean KaisaSpecialIntro(U8 sec)

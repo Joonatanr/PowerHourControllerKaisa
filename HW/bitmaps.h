@@ -51,8 +51,11 @@ extern const Bitmap beershot_bmp;
 extern const Bitmap small_shot_bitmap;
 
 extern const Bitmap kaisa_bitmap;
+extern const Bitmap kaisa_message_bitmap;
+extern const Bitmap kaisa_w_laudur_bitmap;
 
 extern const Bitmap two_beers_prosit_bitmap;
+extern const Bitmap one_large_beer_bitmap;
 
 extern const Bitmap test_image_bitmap;
 

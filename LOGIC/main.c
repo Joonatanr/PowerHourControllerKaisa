@@ -167,10 +167,10 @@ Private void showStartScreen(void)
 
 #ifdef BMP_TEST
     //display_drawBitmap(&girls2_bitmap, 0, 0, TRUE);
-    display_drawBitmap(&test_image_bitmap, 0, 0, TRUE);
-    delay_msec(12000);
-    display_drawBitmap(&kaisa_bitmap, 0, 0, TRUE);
-    delay_msec(6000);
+    //display_drawBitmap(&test_image_bitmap, 0, 0, TRUE);
+    //delay_msec(12000);
+    display_drawBitmap(&kaisa_w_laudur_bitmap, 0, 0, TRUE);
+    delay_msec(16000);
 #endif
 
     display_drawStringCenter("Power Hour", 64u, 5u, FONT_LARGE_FONT, FALSE);
