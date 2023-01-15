@@ -12,12 +12,12 @@
 
 typedef enum
 {
-    POTENTIOMETER_ONE,      /* How brave/intense the girls are   */
-    POTENTIOMETER_TWO,      /* How brave/intense the guys are    */
-    POTENTIOMETER_THREE,    /* How drunk Kaisa is                */
-    POTENTIOMETER_FOUR,     /* Sexy task meter                   */
-    POTENTIOMETER_FIVE,     /* Nude task meter                   */
-    POTENTIOMETER_SIX,      /* How gay is OK?                    */
+    POTENTIOMETER_GIRLS,            /* How brave/intense the girls are   */
+    POTENTIOMETER_GUYS,             /* How brave/intense the guys are    */
+    POTENTIOMETER_KAISA,            /* How drunk Kaisa is                */
+    POTENTIOMETER_SEXY_LEVEL,       /* Sexy task meter                   */
+    POTENTIOMETER_NUDE_LEVEL,       /* Nude task meter                   */
+    POTENTIOMETER_RAINBOW_LEVEL,    /* How gay is OK?                    */
 
     NUMBER_OF_DEFINED_POTENTIOMETERS
 } potentiometer_T;

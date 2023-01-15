@@ -249,7 +249,7 @@ Public void pot_cyclic_10ms(void)
             currentRange[pot_ix] = measured_range;
         }
 
-        setPotLeds(pot_ix, currentRange[pot_ix]);
+        setPotLeds((potentiometer_T)pot_ix, currentRange[pot_ix]);
     }
 
     MAP_ADC14_toggleConversionTrigger();
