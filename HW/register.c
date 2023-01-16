@@ -215,9 +215,6 @@ Private void ports_init(void)
 
     /* Set up reset pin in output mode. */
     GPIO_setAsOutputPin(GPIO_PORT_P3, GPIO_PIN6);
-
-    /* Set up green safety button. */
-    GPIO_setAsInputPin(GPIO_PORT_P3, GPIO_PIN0);
 }
 
 Private void timerA_init(void)
@@ -369,17 +366,6 @@ Public U8 isBtnTwo(void)
 {
     U8 res = 0x00u;
     if (GPIO_getInputPinValue(GPIO_PORT_P1, GPIO_PIN4) == GPIO_INPUT_PIN_LOW)
-    {
-        res = 0x01u;
-    }
-    return res;
-}
-
-
-Public U8 isGreenSafetyBtn(void)
-{
-    U8 res = 0x00u;
-    if (GPIO_getInputPinValue(GPIO_PORT_P3, GPIO_PIN0) == GPIO_INPUT_PIN_LOW)
     {
         res = 0x01u;
     }

@@ -29,7 +29,6 @@ extern void set_disp_reset_pin(U8 state);
 
 extern U8 isBtnOne(void);
 extern U8 isBtnTwo(void);
-extern U8 isGreenSafetyBtn(void);
 
 extern void delay_msec(U16 msec);
 extern U16 generate_random_number(U16 max);

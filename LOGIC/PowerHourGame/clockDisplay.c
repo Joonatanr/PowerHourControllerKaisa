@@ -334,7 +334,7 @@ Public void clockDisplay_cyclic1000msec(void)
         priv_state = CONTROLLER_WARNING_CONFIRM;
         break;
     case CONTROLLER_WARNING_CONFIRM:
-        if ((priv_safety_button_timer) > 60u || isGreenSafetyBtn())
+        if (priv_safety_button_timer > 10u )
         {
             display_clear();
             priv_state = CONTROLLER_COUNTING;
@@ -649,7 +649,7 @@ Private void showWarningText(void)
     display_drawString("device are not responsible",            0u, 11u,    FONT_ARIAL_TINY, FALSE);
     display_drawString("for injury, drunkenness and",           0u, 22u,    FONT_ARIAL_TINY, FALSE);
     display_drawString("/or nudity that may occur.",            0u, 33u,    FONT_ARIAL_TINY, FALSE);
-    display_drawString("Press LAUNCH to continue",              0u, 44u,    FONT_ARIAL_TINY, FALSE);
+    //display_drawString("Press LAUNCH to continue",              0u, 44u,    FONT_ARIAL_TINY, FALSE);
     display_drawString("You have been warned!  ",               0u, 55u,    FONT_ARIAL_TINY, FALSE);
 }
 
