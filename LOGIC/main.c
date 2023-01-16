@@ -114,10 +114,11 @@ void main(void)
     //Initialise logic layer.
     Scheduler_initTasks();
 
-    delay_msec(250);
+    delay_msec(100);
 
     //Start all scheduler task
     Scheduler_StartTasks();
+    delay_msec(100);
 
     //We show the initial start screen for a while.
     showStartScreen();
