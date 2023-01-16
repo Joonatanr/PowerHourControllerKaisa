@@ -225,12 +225,12 @@ Private void dedication_start(void)
 
     display_clear();
     display_drawString("This Power Hour Machine",           0u, 2u,  FONT_ARIAL_TINY, FALSE);
-    display_drawString("was built by BEST alumni for",      0u, 11u, FONT_ARIAL_TINY, FALSE);
-    display_drawString("LBG Tallinn to celebrate",          0u, 20u, FONT_ARIAL_TINY, FALSE);
-    display_drawString("its 30th birthday",                 0u, 29u, FONT_ARIAL_TINY, FALSE);
-    display_drawString("8. January 2021",                   0u, 38u, FONT_ARIAL_TINY, FALSE);
-    display_drawString("by Mart, Magnus, Alvar,   ",        0u, 47u, FONT_ARIAL_TINY, FALSE);
-    display_drawString("Gritten and Joonatan      ",        0u, 56u, FONT_ARIAL_TINY, FALSE);
+    display_drawString("was built for Kaisa Lomp",          0u, 11u, FONT_ARIAL_TINY, FALSE);
+    display_drawString("by her friends in Estonia:",        0u, 20u, FONT_ARIAL_TINY, FALSE);
+    display_drawString("Urmet, Jorx, Diana, Mihkel,",       0u, 29u, FONT_ARIAL_TINY, FALSE);
+    display_drawString("Kristel and Joonatan",              0u, 38u, FONT_ARIAL_TINY, FALSE);
+    display_drawString("as a parting gift, to be enjoyed",  0u, 47u, FONT_ARIAL_TINY, FALSE);
+    display_drawString("in the land Down Under",            0u, 56u, FONT_ARIAL_TINY, FALSE);
 
     /* Lets draw the <sigh> ä signs */
     display_setPixel(22u, 47u, TRUE);
