@@ -57,7 +57,7 @@ Private U8 priv_display_buffer[NUMBER_OF_COLUMNS][NUMBER_OF_PAGES];
 Private U8 priv_split_buffer[NUMBER_OF_COLUMNS]; //Used for splitting image data between pages.
 
 Private U16 priv_page_validity_bits[NUMBER_OF_PAGES]; //Each page is divided into 16 virtual segments.
-
+Private Boolean priv_is_locked = FALSE;
 
 //Display patterns.
 
@@ -156,7 +156,7 @@ Public void display_cyclic_50msec(void)
 {
     //Redraw display.
     U8 page, column, seg, prev_column;
-    if (isDisplayReady)
+    if (isDisplayReady && !priv_is_locked)
     {
         for (page = 0u; page < NUMBER_OF_PAGES; page++)
         {
@@ -517,6 +517,12 @@ Public U16 display_getStringWidth(const char * str, FontType font)
     }
 
     return width;
+}
+
+
+Public void display_lock(Boolean isLocked)
+{
+    priv_is_locked = isLocked;
 }
 
 #if 0

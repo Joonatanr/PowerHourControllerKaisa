@@ -164,6 +164,10 @@ Private void timer_lo_prio(void)
 
 Private void showStartScreen(void)
 {
+    /* We don't want the driver to start drawing while we are filling the framebuffer.
+     * In other places it is not really a problem, because the display cyclic function is called at the end of the thread as a
+     * last step. Here however we are calling directly from main. */
+    display_lock(TRUE);
     display_clear();
 
 #ifdef BMP_TEST
@@ -202,6 +206,7 @@ Private void showStartScreen(void)
     display_drawStringCenter("Power Hour", 64u, 5u, FONT_LARGE_FONT, FALSE);
     display_drawStringCenter(priv_version_string, 64u, 20u, FONT_LARGE_FONT, FALSE);
     display_drawStringCenter("Kaisa Edition", 64u, 40u, FONT_MEDIUM_FONT, FALSE);
+    display_lock(FALSE);
 }
 
 /* Starts the main Power Hour game. */

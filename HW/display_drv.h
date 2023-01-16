@@ -63,4 +63,6 @@ extern void display_clear(void);
 extern void display_setPixel(U8 x, U8 y, Boolean val);
 extern void display_drawLine(Point begin, Point end, Boolean isBlack);
 
+extern void display_lock(Boolean isLocked);
+
 #endif /* HW_DISPLAY_DRV_H_ */
