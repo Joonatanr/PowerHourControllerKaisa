@@ -27,7 +27,7 @@ typedef struct __Bargraph__
 } Bargraph_T;
 
 extern Bargraph_T BRIGHTNESS_BARGRAPH;
-extern Bargraph_T SNAKE_SPEEED_BARGRAPH;
+extern Bargraph_T SNAKE_SPEED_BARGRAPH;
 extern Bargraph_T TASK_FREQUENCY_BARGRAPH;
 
 extern void enterBarGraph(Bargraph_T * bar);

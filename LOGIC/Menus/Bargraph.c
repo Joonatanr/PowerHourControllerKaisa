@@ -76,7 +76,7 @@ Public Bargraph_T BRIGHTNESS_BARGRAPH =
      .value_initial_fptr = NULL,
 };
 
-Public Bargraph_T SNAKE_SPEEED_BARGRAPH =
+Public Bargraph_T SNAKE_SPEED_BARGRAPH =
 {
      .max_value = 5u,
      .min_value = 1u,
