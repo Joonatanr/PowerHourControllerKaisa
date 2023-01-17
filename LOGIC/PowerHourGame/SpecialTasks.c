@@ -58,6 +58,7 @@ typedef struct
 
 //Private Boolean DrinkTwiceTask(U8 sec, const char * headerWord);
 Private Boolean DrinkTwiceTask(U8 sec, SpecialTaskType type);
+Private Boolean DrinkWaterTask(U8 sec, SpecialTaskType type);
 Private Boolean SpecialTaskWithRandomText(U8 sec, SpecialTaskType type);
 Private const Task_T * getRandomTaskFromArray(Task_T * array, U8 array_size);
 Private Boolean isTaskEnabled(const Task_T * task_ptr, U8 sexy_level, U8 nude_level, U8 gay_level);
@@ -108,7 +109,7 @@ Private const SpecialTaskFunc priv_special_tasks_kaisa_array[] =
   &DrinkTwiceTask,
   &SpecialTaskWithRandomText,
   &SpecialTaskWithRandomText,
-  &SpecialTaskWithRandomText,
+  &DrinkWaterTask,
   &SpecialTaskWithRandomText,
   &SpecialTaskWithRandomText,
 };
@@ -251,6 +252,8 @@ Private Task_T priv_TextArrayGirlsLevel2[] =
      { "Girls who are",      "former virgins",       "drink 2x"            , .counter = 0u,  .nude_level = 0u, .sexy_level = 1u, .gay_level = 0u  }, /* 14 */
      { "Girls must purr",    "like a kitten",        "after drinking!"     , .counter = 0u,  .nude_level = 0u, .sexy_level = 1u, .gay_level = 0u  }, /* 15 */
      { "All girls who" ,     "kissed a girl",        "today drink 2x"      , .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 1u  }, /* 17 */
+     { "All girls shall" ,   "slap a guy and",       "then drink 2x"       , .counter = 0u,  .nude_level = 0u, .sexy_level = 2u, .gay_level = 0u  }, /* 17 */
+
 };
 
 /* Medium tasks. */
@@ -267,6 +270,9 @@ Private Task_T priv_TextArrayGuysLevel2[] =
      {  "All former senors",      "drink vodka",               NULL                 ,  .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u  },  /* 9  */
      {  "Guys must do",           "10 squats",                "before drinking"     ,  .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u  },  /* 13 */
      {  "Guys that love",         "heavy metal",              "drink vodka"         ,  .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u  },  /* 14 */
+     {  "The guy who resembles",  "Elvis most",               "drinks 3x"           ,  .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u  },  /* 14 */
+     {  "The guy with the ",      "least amount of hair",     "drinks 3x"           ,  .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u  },  /* 14 */
+
 
  /* Tasks that need criteria. */
      {  "All guys must come"    , " up with a pickup ",       "line in 60 seconds"  ,  .counter = 0u,  .nude_level = 0u, .sexy_level = 1u, .gay_level = 0u  },  /* 3  */
@@ -276,9 +282,11 @@ Private Task_T priv_TextArrayGuysLevel2[] =
      {  "Guys who have",          "kissed a dude",            "drink vodka!"        ,  .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 1u  },  /* 11 */
      {  "Guys must",              "say meow",                 "after drinking!"     ,  .counter = 0u,  .nude_level = 0u, .sexy_level = 1u, .gay_level = 0u  },  /* 12 */
      {  "Guys say No Homo!",      "Look each other in",       "the eyes and drink"  ,  .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 1u  },  /* 15 */
+     {  "All guys who have ",     "shaved balls",             "drink vodka"         ,  .counter = 0u,  .nude_level = 0u, .sexy_level = 2u, .gay_level = 0u  },  /* 14 */
+
 };
 
-
+/* Medium difficulty tasks */
 Private Task_T priv_TextArrayAllLevel2[] =
 {
  /* Casual tasks : These should not contain any extra criteria. */
@@ -287,9 +295,9 @@ Private Task_T priv_TextArrayAllLevel2[] =
      {  "Everybody drinks"      , "1 shot of vodka",     "and 1 shot of beer" , .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u     }, /* 3  */
      {  "Whoever is closest to" , "the machine must", "distribute 6 beershots", .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u     }, /* 3  */
 
-
  /* Tasks that need criteria. */
-     /* TODO */
+     {  "Everybody takes off"   , "One Item of Clothing", "or drinks vodka"   ,  .counter = 0u,  .nude_level = 1u, .sexy_level = 0u, .gay_level = 0u  },  /* 3  */
+     {  "Everybody takes off"   , "One Item of Clothing",          NULL       ,  .counter = 0u,  .nude_level = 2u, .sexy_level = 0u, .gay_level = 0u  },  /* 3  */
      {  "Everybody takes off"   , "One Item of Clothing", "or drinks vodka"   ,  .counter = 0u,  .nude_level = 1u, .sexy_level = 0u, .gay_level = 0u  },  /* 3  */
      {  "Everybody takes off"   , "One Item of Clothing",          NULL       ,  .counter = 0u,  .nude_level = 2u, .sexy_level = 0u, .gay_level = 0u  },  /* 3  */
 
@@ -299,17 +307,23 @@ Private Task_T priv_TextArrayAllLevel2[] =
      {  "Everybody who has"     , "gotten an orgasm",     "today drinks 3x"   ,  .counter = 0u,  .nude_level = 0u, .sexy_level = 2u, .gay_level = 0u  },  /* 3  */
      {  "Every who has ever"    , "had a penis in their", "mouth drink 3x"    ,  .counter = 0u,  .nude_level = 0u, .sexy_level = 1u, .gay_level = 0u  },  /* 3  */
 
+     {  "Everybody drinks"      , "while holding hands",  "in a circle"       ,  .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 1u  },  /* 3  */
+
 };
 
 /* TODO : Placeholder. */
+/* Medium difficulty tasks */
 Private Task_T priv_TextArrayKaisaLevel2[] =
 {
  /* Casual tasks : These should not contain any extra criteria. */
-     {  NULL                    , "Kaisa drinks 2x",               NULL       , .counter = 0u, .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u  }, /* 1  */
+     {  NULL                    , "Kaisa drinks 3x",               NULL       , .counter = 0u, .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u  }, /* 1  */
      {  NULL                    , "Kaisa drinks 2x",               NULL       , .counter = 0u, .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u  }, /* 2  */
      {  NULL                    , "Kaisa drinks 2x",               NULL       , .counter = 0u, .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u  }, /* 3  */
  /* Tasks that need criteria. */
      /* TODO */
+     {  "Kaisa takes off"       , "One Item of Clothing", "or drinks vodka"      ,  .counter = 0u,  .nude_level =   3u, .sexy_level = 0u, .gay_level = 0u  },  /* 3  */
+     {  "Kaisa can confiscate"  , "One Item of Clothing",          NULL          ,  .counter = 0u,  .nude_level =   3u, .sexy_level = 0u, .gay_level = 0u  },  /* 3  */
+
 };
 
 /* Hard tasks.  */
@@ -613,21 +627,24 @@ Private Boolean DrinkTwiceTask(U8 sec, SpecialTaskType type)
        {
            case TASK_FOR_GIRLS:
                strcpy(priv_str_buf, "Girls");
+               strcat(priv_str_buf, " drink");
                break;
            case TASK_FOR_GUYS:
                strcpy(priv_str_buf, "Guys");
+               strcat(priv_str_buf, " drink");
                break;
            case TASK_FOR_EVERYONE:
                strcpy(priv_str_buf, "Everyone");
+               strcat(priv_str_buf, " drinks");
                break;
            case TASK_FOR_KAISA:
                strcpy(priv_str_buf, "Kaisa");
+               strcat(priv_str_buf, " drinks");
                break;
            default:
                break;
        }
 
-       strcat(priv_str_buf, " drink");
        display_drawStringCenter(priv_str_buf, 64u, 2u, FONT_LARGE_FONT, FALSE);
        display_drawStringCenter("2x", 64u ,20u, FONT_LARGE_FONT, FALSE);
        break;
@@ -636,6 +653,64 @@ Private Boolean DrinkTwiceTask(U8 sec, SpecialTaskType type)
        break;
     case (3u):
         display_drawBitmapCenter(&small_shot_bitmap, 64 + SMALL_SHOT_INTERVAL, SMALL_SHOT_Y, FALSE);
+       break;
+    case(10u):
+       res = TRUE;
+       break;
+    default:
+        break;
+    }
+
+    return res;
+}
+
+
+/*****************************************************************************************************
+ *
+ * Private function definitions
+ *
+ *****************************************************************************************************/
+Private Boolean DrinkWaterTask(U8 sec, SpecialTaskType type)
+{
+    Boolean res = FALSE;
+
+    /* We decide that Kaisa should drink a glass of water to prevent her getting too inebriated :D */
+    if (pot_getSelectedRange(POTENTIOMETER_KAISA) < 2u)
+    {
+        return SpecialTaskWithRandomText(sec, type);
+    }
+
+    switch(sec)
+    {
+    case(1u):
+       display_clear();
+       switch(type)
+       {
+           case TASK_FOR_GIRLS:
+               strcpy(priv_str_buf, "Girls");
+               strcat(priv_str_buf, " drink");
+               break;
+           case TASK_FOR_GUYS:
+               strcpy(priv_str_buf, "Guys");
+               strcat(priv_str_buf, " drink");
+               break;
+           case TASK_FOR_EVERYONE:
+               strcpy(priv_str_buf, "Everyone");
+               strcat(priv_str_buf, " drinks");
+               break;
+           case TASK_FOR_KAISA:
+               strcpy(priv_str_buf, "Kaisa");
+               strcat(priv_str_buf, " drinks");
+               break;
+           default:
+               break;
+       }
+
+       display_drawStringCenter(priv_str_buf, 64u, 2u, FONT_LARGE_FONT, FALSE);
+       display_drawStringCenter("a glass of water", 64u ,20u, FONT_LARGE_FONT, FALSE);
+       break;
+    case (2u):
+       display_drawBitmapCenter(&small_shot_bitmap, 64, SMALL_SHOT_Y, FALSE);
        break;
     case(10u):
        res = TRUE;
