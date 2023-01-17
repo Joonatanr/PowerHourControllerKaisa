@@ -285,13 +285,19 @@ Private Task_T priv_TextArrayAllLevel2[] =
      {  NULL                    , "Everybody drink 2x",            NULL       , .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u     }, /* 1  */
      {  NULL                    , "Everybody drink 3x",            NULL       , .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u     }, /* 2  */
      {  "Everybody drinks"      , "1 shot of vodka",     "and 1 shot of beer" , .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u     }, /* 3  */
+     {  "Whoever is closest to" , "the machine must", "distribute 6 beershots", .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u     }, /* 3  */
+
 
  /* Tasks that need criteria. */
      /* TODO */
      {  "Everybody takes off"   , "One Item of Clothing", "or drinks vodka"   ,  .counter = 0u,  .nude_level = 1u, .sexy_level = 0u, .gay_level = 0u  },  /* 3  */
      {  "Everybody takes off"   , "One Item of Clothing",          NULL       ,  .counter = 0u,  .nude_level = 2u, .sexy_level = 0u, .gay_level = 0u  },  /* 3  */
 
+     {  "Everybody drinks"      , "while slapping",       "their own ass"     ,  .counter = 0u,  .nude_level = 0u, .sexy_level = 2u, .gay_level = 0u  },  /* 3  */
+     {  "Everybody drinks"      , "while sitting on",     "their hands"       ,  .counter = 0u,  .nude_level = 0u, .sexy_level = 1u, .gay_level = 0u  },  /* 3  */
+
      {  "Everybody who has"     , "gotten an orgasm",     "today drinks 3x"   ,  .counter = 0u,  .nude_level = 0u, .sexy_level = 2u, .gay_level = 0u  },  /* 3  */
+     {  "Every who has ever"    , "had a penis in their", "mouth drink 3x"    ,  .counter = 0u,  .nude_level = 0u, .sexy_level = 1u, .gay_level = 0u  },  /* 3  */
 
 };
 
