@@ -291,7 +291,7 @@ Private Task_T priv_TextArrayGuysLevel2[] =
      {  "Guys must",              "say meow",                 "after drinking!"     ,  .counter = 0u,  .nude_level = 0u, .sexy_level = 1u, .gay_level = 0u  },  /* 12 */
      {  "Guys say No Homo!",      "Look each other in",       "the eyes and drink"  ,  .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 1u  },  /* 15 */
      {  "All guys who have ",     "shaved balls",             "drink vodka"         ,  .counter = 0u,  .nude_level = 0u, .sexy_level = 2u, .gay_level = 0u  },  /* 14 */
-     { "All guys must" ,          "drink while",               "dancing"            , .counter = 0u,  .nude_level = 0u, .sexy_level = 2u, .gay_level = 0u  }, /* 19 */
+     { "All guys must" ,          "drink while",               "dancing"            ,  .counter = 0u,  .nude_level = 0u, .sexy_level = 2u, .gay_level = 0u  }, /* 19 */
 
 };
 
@@ -320,7 +320,7 @@ Private Task_T priv_TextArrayAllLevel2[] =
 
 };
 
-/* TODO : Placeholder. */
+
 /* Medium difficulty tasks */
 Private Task_T priv_TextArrayKaisaLevel2[] =
 {
@@ -333,12 +333,10 @@ Private Task_T priv_TextArrayKaisaLevel2[] =
 
 
  /* Tasks that need criteria. */
-     /* TODO */
-     {  "Kaisa takes off"       , "One Item of Clothing", "or drinks vodka"      ,  .counter = 0u,  .nude_level =   3u, .sexy_level = 0u, .gay_level = 0u  },  /* 3  */
-     {  "Kaisa can confiscate"  , "One Item of Clothing",          NULL          ,  .counter = 0u,  .nude_level =   3u, .sexy_level = 0u, .gay_level = 0u  },  /* 3  */
-     {  "Kaisa shall combine"   , "whipped cream and",     "making out"          ,  .counter = 0u,  .nude_level =   0u, .sexy_level = 2u, .gay_level = 0u  },  /* 3  */
-     {  "Kaisa must make out"   , "with one other player", "(or several)"        ,  .counter = 0u,  .nude_level =   0u, .sexy_level = 3u, .gay_level = 0u  },  /* 3  */
-
+     {  "Kaisa takes off"       , "One Item of Clothing", "or drinks vodka"   ,  .counter = 0u,  .nude_level =   3u, .sexy_level = 0u, .gay_level = 0u  },  /* 3  */
+     {  "Kaisa can confiscate"  , "One Item of Clothing",          NULL       ,  .counter = 0u,  .nude_level =   3u, .sexy_level = 0u, .gay_level = 0u  },  /* 3  */
+     {  "Kaisa shall combine"   , "whipped cream and",     "making out"       ,  .counter = 0u,  .nude_level =   0u, .sexy_level = 2u, .gay_level = 0u  },  /* 3  */
+     {  "Kaisa must make out"   , "with one other player", "(or several)"     ,  .counter = 0u,  .nude_level =   0u, .sexy_level = 3u, .gay_level = 0u  },  /* 3  */
 };
 
 /* Hard tasks.  */
@@ -542,6 +540,8 @@ Private Task_T priv_TextArrayAllLevel4[] =
      {  "Everybody must kiss"   , "a member of the",        "same sex"        , .counter = 0u, .nude_level = 0u, .sexy_level = 2u, .gay_level = 2u            }, /* 1  */
      {  "Everybody must spank"  , "the player on the",      "left, and drink" , .counter = 0u, .nude_level = 0u, .sexy_level = 2u, .gay_level = 1u            }, /* 1  */
 
+     {  "Error #0x43F677"       , "Party is getting",     "too fucked up!!!"  , .counter = 0u, .nude_level = 3u, .sexy_level = 3u, .gay_level = 3u            }, /* 3  */
+
 };
 
 
@@ -584,6 +584,8 @@ Private Task_T priv_TextArrayKaisaLevel4[] =
      {  "Kaisa must pretend that"   , "she is sitting",          "on a vibrator for 30s"         , .counter = 0u, .nude_level = 0u, .sexy_level = 3u, .gay_level = 0u            }, /* 3  */
 
      {  "Kaisa must choose 1"       , "person to give her",               "an oil massage"       , .counter = 0u, .nude_level = 0u, .sexy_level = 3u, .gay_level = 0u            }, /* 3  */
+
+     {  "Kaisa must come up with"   , "the most naked sexy task",     "that is pretty gay"       , .counter = 0u, .nude_level = 3u, .sexy_level = 3u, .gay_level = 3u            }, /* 3  */
 
 };
 
@@ -892,6 +894,17 @@ Private Boolean SpecialTaskWithRandomText(U8 sec, SpecialTaskType type)
         case(4u):
             {
                 display_drawStringCenter(priv_task_str_ptr->lower_text, 64u, 43u, FONT_MEDIUM_FONT, FALSE);
+            }
+            break;
+        case (8u):
+            {
+                if ((pot_getSelectedRange(POTENTIOMETER_SEXY_LEVEL) == 0u) && (pot_getSelectedRange(POTENTIOMETER_NUDE_LEVEL) == 0u) && (pot_getSelectedRange(POTENTIOMETER_RAINBOW_LEVEL) == 0u))
+                {
+                    display_clear();
+                    display_drawStringCenter("Come on guys!", 64u, 4u, FONT_MEDIUM_FONT, FALSE);
+                    display_drawStringCenter("don't be pussies!", 64u, 23u, FONT_MEDIUM_FONT, FALSE);
+                    display_drawStringCenter("Turn up some sexy!", 64u, 43u, FONT_MEDIUM_FONT, FALSE);
+                }
             }
             break;
         case(12u):
