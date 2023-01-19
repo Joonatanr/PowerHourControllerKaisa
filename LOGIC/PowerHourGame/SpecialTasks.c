@@ -176,6 +176,20 @@ Private Task_T priv_TextArrayGuysLevel1[] =
      { "All guys whose" ,         "name starts with",     "S drinks 2x"       , .counter = 0u  , .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u}, /* 18 */
 
 /* Tasks that need criteria. */
+/* Strange cases, where somebody is playing on easy mode, but with maximum nudity. */
+     {  "All guys take off"        , "one item of",             "clothing"      , .counter = 0u,  .nude_level = 3u, .sexy_level = 0u, .gay_level = 0u   },
+     {  "All guys take off"        , "one item of",             "clothing"      , .counter = 0u,  .nude_level = 3u, .sexy_level = 0u, .gay_level = 0u   },
+     {  "All guys take off"        , "one item of",             "clothing"      , .counter = 0u,  .nude_level = 3u, .sexy_level = 0u, .gay_level = 0u   },
+     {  "All guys take off"        , "their shirts",            NULL            , .counter = 0u,  .nude_level = 3u, .sexy_level = 0u, .gay_level = 0u   },
+     {  "All guys who have"        , "wanked in past 2 days",   "take off shirt", .counter = 0u,  .nude_level = 3u, .sexy_level = 1u, .gay_level = 0u   },
+
+
+/* Strange cases, where somebody is playing on easy mode, but with maximum sexyness */
+     {  "Guy closest to"           , "machine spins",         "the bottle"      , .counter = 0u,  .nude_level = 0u, .sexy_level = 3u, .gay_level = 0u   },
+     {  "Kaisa chooses one"        , "of the guys",           "to make out with", .counter = 0u,  .nude_level = 0u, .sexy_level = 3u, .gay_level = 1u   },
+
+/* Strange cases, where somebody is playing on easy mode, but with maximum gay */
+     {  "Guys drink vodka" ,       "Girls have to",         "kiss"            , .counter = 0u,  .nude_level = 0u, .sexy_level = 1u, .gay_level = 3u   },
 };
 
 /* Easy Tasks */
@@ -270,11 +284,16 @@ Private Task_T priv_TextArrayGirlsLevel2[] =
      { "All girls lose" ,    "1 item of ",   "clothing"                    , .counter = 0u,  .nude_level = 2u, .sexy_level = 0u, .gay_level = 0u  }, /* 8  */
      { "All girls lose" ,    "1 item of ",   "clothing"                    , .counter = 0u,  .nude_level = 2u, .sexy_level = 0u, .gay_level = 0u  }, /* 8  */
      { "All girls lose" ,    "1 item of ",   "clothing"                    , .counter = 0u,  .nude_level = 2u, .sexy_level = 0u, .gay_level = 0u  }, /* 8  */
+     { "All girls lose" ,    "2 items of ",  "clothing"                    , .counter = 0u,  .nude_level = 3u, .sexy_level = 0u, .gay_level = 0u  }, /* 8  */
+     { "All girls lose" ,    "2 items of ",  "clothing"                    , .counter = 0u,  .nude_level = 3u, .sexy_level = 0u, .gay_level = 0u  }, /* 8  */
+
      { "Girls who are",      "former virgins",       "drink 2x"            , .counter = 0u,  .nude_level = 0u, .sexy_level = 1u, .gay_level = 0u  }, /* 14 */
      { "Girls must purr",    "like a kitten",        "after drinking!"     , .counter = 0u,  .nude_level = 0u, .sexy_level = 1u, .gay_level = 0u  }, /* 15 */
      { "All girls who" ,     "kissed a girl",        "today drink 2x"      , .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 1u  }, /* 17 */
      { "All girls shall" ,   "slap a guy and",       "then drink 2x"       , .counter = 0u,  .nude_level = 0u, .sexy_level = 2u, .gay_level = 0u  }, /* 17 */
      { "All girls must" ,    "drink while",          "dancing"             , .counter = 0u,  .nude_level = 0u, .sexy_level = 2u, .gay_level = 0u  }, /* 19 */
+     { "All girls must" ,    "drink while",          "twerking"            , .counter = 0u,  .nude_level = 0u, .sexy_level = 3u, .gay_level = 0u  }, /* 19 */
+     { "At least two girls" ,"must make out",        "before drinking"     , .counter = 0u,  .nude_level = 0u, .sexy_level = 3u, .gay_level = 2u  }, /* 19 */
 
 };
 
@@ -293,21 +312,29 @@ Private Task_T priv_TextArrayGuysLevel2[] =
      {  "Guys must do",           "10 squats",                "before drinking"     ,  .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u  },  /* 13 */
      {  "Guys that love",         "heavy metal",              "drink vodka"         ,  .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u  },  /* 14 */
      {  "The guy who resembles",  "Elvis most",               "drinks 3x"           ,  .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u  },  /* 14 */
+     {  "The guy who resembles",  "Kurt Cobain most",         "drinks 3x"           ,  .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u  },  /* 14 */
+
      {  "The guy with the ",      "least amount of hair",     "drinks 3x"           ,  .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u  },  /* 14 */
      {  "Guys must drink while ", "beatboxing the ",          "Pornhub theme"       ,  .counter = 0u,  .nude_level = 0u, .sexy_level = 1u, .gay_level = 0u  },  /* 14 */
      {  "Guys must drink while ", "singing ",                 "Barbie Girl!"        ,  .counter = 0u,  .nude_level = 0u, .sexy_level = 1u, .gay_level = 0u  },  /* 14 */
+     {  "All guys who like "    , "bad girls ",               "drink 3x"            ,  .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u  },  /* 14 */
+     {  "All guys who like "    , "good girls ",              "drink 3x"            ,  .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u  },  /* 14 */
 
 
  /* Tasks that need criteria. */
      {  "All guys must come"    , " up with a pickup ",       "line in 60 seconds"  ,  .counter = 0u,  .nude_level = 0u, .sexy_level = 1u, .gay_level = 0u  },  /* 3  */
      {  "All guys lose"         , "One Item of Clothing",       NULL                ,  .counter = 0u,  .nude_level = 2u, .sexy_level = 0u, .gay_level = 0u  },  /* 3  */
      {  "All guys lose"         , "One Item of Clothing",       NULL                ,  .counter = 0u,  .nude_level = 2u, .sexy_level = 0u, .gay_level = 0u  },  /* 3  */
+     {  "All guys lose"         , "two items of Clothing",      NULL                ,  .counter = 0u,  .nude_level = 3u, .sexy_level = 0u, .gay_level = 0u  },
+     {  "All guys lose"         , "two items of Clothing",      NULL                ,  .counter = 0u,  .nude_level = 3u, .sexy_level = 0u, .gay_level = 0u  },
      {  "All guys who are",       "virgins drink 2x",         "and best of luck!"   ,  .counter = 0u,  .nude_level = 0u, .sexy_level = 1u, .gay_level = 0u  },  /* 10 */
      {  "Guys who have",          "kissed a dude",            "drink vodka!"        ,  .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 1u  },  /* 11 */
      {  "Guys must",              "say meow",                 "after drinking!"     ,  .counter = 0u,  .nude_level = 0u, .sexy_level = 1u, .gay_level = 0u  },  /* 12 */
      {  "Guys say No Homo!",      "Look each other in",       "the eyes and drink"  ,  .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 1u  },  /* 15 */
      {  "All guys who have ",     "shaved balls",             "drink vodka"         ,  .counter = 0u,  .nude_level = 0u, .sexy_level = 2u, .gay_level = 0u  },  /* 14 */
-     { "All guys must" ,          "drink while",               "dancing"            ,  .counter = 0u,  .nude_level = 0u, .sexy_level = 2u, .gay_level = 0u  }, /* 19 */
+     {  "All guys must" ,          "drink while",             "dancing"             ,  .counter = 0u,  .nude_level = 0u, .sexy_level = 2u, .gay_level = 0u  },  /* 19 */
+     {  "All guys must" ,          "drink while",             "holding hands"       ,  .counter = 0u,  .nude_level = 0u, .sexy_level = 1u, .gay_level = 2u  },  /* 19 */
+     {  "All guys who" ,           "own a vibrator",          "drink 3x"            ,  .counter = 0u,  .nude_level = 0u, .sexy_level = 1u, .gay_level = 0u  },  /* 19 */
 
 };
 
@@ -318,6 +345,9 @@ Private Task_T priv_TextArrayAllLevel2[] =
      {  NULL                    , "Everybody drink 2x",            NULL       , .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u     }, /* 1  */
      {  NULL                    , "Everybody drink 3x",            NULL       , .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u     }, /* 2  */
      {  "Everybody drinks"      , "1 shot of vodka",     "and 1 shot of beer" , .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u     }, /* 3  */
+     {  "Everybody who is "     , "already drunk",          "drinks 3x"       , .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u     }, /* 3  */
+     {  "Whoever is the most"   , "drunk (probably Kaisa)",   "drinks 3x"     , .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u     }, /* 3  */
+
      {  "Whoever is closest to" , "the machine must", "distribute 6 beershots", .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u     }, /* 3  */
 
  /* Tasks that need criteria. */
@@ -326,11 +356,15 @@ Private Task_T priv_TextArrayAllLevel2[] =
      {  "Everybody takes off"   , "One Item of Clothing", "or drinks vodka"   ,  .counter = 0u,  .nude_level = 1u, .sexy_level = 0u, .gay_level = 0u  },  /* 3  */
      {  "Everybody takes off"   , "One Item of Clothing",          NULL       ,  .counter = 0u,  .nude_level = 2u, .sexy_level = 0u, .gay_level = 0u  },  /* 3  */
 
+     {  "Everybody who is"      , "horny drinks",                   "3x"      , .counter = 0u,  .nude_level = 0u, .sexy_level = 1u, .gay_level = 0u     }, /* 3  */
+     {  "Everybody who has"     , "ever watched gay",   "porn drinks 3x"      , .counter = 0u,  .nude_level = 0u, .sexy_level = 1u, .gay_level = 1u     }, /* 3  */
+     {  "Everybody who has"     , "watched porn",       "today drinks 3x"     , .counter = 0u,  .nude_level = 0u, .sexy_level = 1u, .gay_level = 0u     }, /* 3  */
+
      {  "Everybody drinks"      , "while slapping",       "their own ass"     ,  .counter = 0u,  .nude_level = 0u, .sexy_level = 2u, .gay_level = 0u  },  /* 3  */
      {  "Everybody drinks"      , "while sitting on",     "their hands"       ,  .counter = 0u,  .nude_level = 0u, .sexy_level = 1u, .gay_level = 0u  },  /* 3  */
 
      {  "Everybody who has"     , "gotten an orgasm",     "today drinks 3x"   ,  .counter = 0u,  .nude_level = 0u, .sexy_level = 2u, .gay_level = 0u  },  /* 3  */
-     {  "Every who has ever"    , "had a penis in their", "mouth drink 3x"    ,  .counter = 0u,  .nude_level = 0u, .sexy_level = 1u, .gay_level = 0u  },  /* 3  */
+     {  "Every who has ever"    , "had a penis in their", "mouth drink 3x"    ,  .counter = 0u,  .nude_level = 0u, .sexy_level = 2u, .gay_level = 0u  },  /* 3  */
 
      {  "Everybody drinks"      , "while holding hands",  "in a circle"       ,  .counter = 0u,  .nude_level = 0u, .sexy_level = 0u, .gay_level = 1u  },  /* 3  */
 
@@ -350,6 +384,8 @@ Private Task_T priv_TextArrayKaisaLevel2[] =
 
  /* Tasks that need criteria. */
      {  "Kaisa takes off"       , "One Item of Clothing", "or drinks vodka"   ,  .counter = 0u,  .nude_level =   3u, .sexy_level = 0u, .gay_level = 0u  },  /* 3  */
+     {  "Kaisa takes off"       , "One Item of Clothing", "or drinks vodka"   ,  .counter = 0u,  .nude_level =   3u, .sexy_level = 0u, .gay_level = 0u  },  /* 3  */
+
      {  "Kaisa can confiscate"  , "One Item of Clothing",          NULL       ,  .counter = 0u,  .nude_level =   3u, .sexy_level = 0u, .gay_level = 0u  },  /* 3  */
      {  "Kaisa shall combine"   , "whipped cream and",     "making out"       ,  .counter = 0u,  .nude_level =   0u, .sexy_level = 2u, .gay_level = 0u  },  /* 3  */
      {  "Kaisa must make out"   , "with one other player", "(or several)"     ,  .counter = 0u,  .nude_level =   0u, .sexy_level = 3u, .gay_level = 0u  },  /* 3  */
