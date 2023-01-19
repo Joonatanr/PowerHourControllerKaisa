@@ -136,6 +136,22 @@ Private Task_T priv_TextArrayGirlsLevel1[] =
      { "All girls",          "with glasses ",          "drink 2x"          , .counter = 0u  , .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u }, /* 16 */
      { "Choose 1 girl",      "that drinks 2x",        NULL                 , .counter = 0u  , .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u }, /* 17 */
      { "All girls",          "wearing black",         "drink 2x"           , .counter = 0u  , .nude_level = 0u, .sexy_level = 0u, .gay_level = 0u }, /* 18 */
+
+     /* Strange cases, where somebody is playing on easy mode, but with maximum nudity. */
+     {  "All girls take off"        , "one item of",             "clothing"      , .counter = 0u,  .nude_level = 3u, .sexy_level = 0u, .gay_level = 0u   },
+     {  "All girls take off"        , "one item of",             "clothing"      , .counter = 0u,  .nude_level = 3u, .sexy_level = 0u, .gay_level = 0u   },
+     {  "All blondes take off"      , "one item of",             "clothing"      , .counter = 0u,  .nude_level = 3u, .sexy_level = 0u, .gay_level = 0u   },
+     {  "All brunettes take off"    , "one item of",             "clothing"      , .counter = 0u,  .nude_level = 3u, .sexy_level = 0u, .gay_level = 0u   },
+     {  "All redheads"              , "one item of",             "clothing"      , .counter = 0u,  .nude_level = 3u, .sexy_level = 0u, .gay_level = 0u   },
+
+     /* Strange cases, where somebody is playing on easy mode, but with maximum sexyness */
+     {  "Girl closest to"           , "machine spins",         "the bottle"      , .counter = 0u,  .nude_level = 0u, .sexy_level = 3u, .gay_level = 0u   },
+     {  "All girls find"            , "somebody to",           "kiss"            , .counter = 0u,  .nude_level = 0u, .sexy_level = 3u, .gay_level = 0u   },
+     {  "One girls must"            , "make out with",         "Kaisa"           , .counter = 0u,  .nude_level = 0u, .sexy_level = 3u, .gay_level = 1u   },
+
+
+     /* Strange cases, where somebody is playing on easy mode, but with maximum gay */
+     {  "Guys drink vodka" ,       "Girls have to",         "kiss"            , .counter = 0u,  .nude_level = 0u, .sexy_level = 1u, .gay_level = 3u   },
 };
 
 /* Easy tasks. */
