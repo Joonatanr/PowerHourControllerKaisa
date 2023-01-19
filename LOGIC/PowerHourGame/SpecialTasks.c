@@ -381,12 +381,19 @@ Private Task_T priv_TextArrayKaisaLevel2[] =
      {  "Kaisa must use a cheesy", "pickup line on", "somebody in the room"   , .counter = 0u, .nude_level = 0u, .sexy_level = 1u, .gay_level = 0u  }, /* 3  */
      {  "Kaisa must distribute"  , "6x beershots"  , "among the players"      , .counter = 0u, .nude_level = 0u, .sexy_level = 1u, .gay_level = 0u  }, /* 3  */
 
-
  /* Tasks that need criteria. */
-     {  "Kaisa takes off"       , "One Item of Clothing", "or drinks vodka"   ,  .counter = 0u,  .nude_level =   3u, .sexy_level = 0u, .gay_level = 0u  },  /* 3  */
-     {  "Kaisa takes off"       , "One Item of Clothing", "or drinks vodka"   ,  .counter = 0u,  .nude_level =   3u, .sexy_level = 0u, .gay_level = 0u  },  /* 3  */
+     {  "Kaisa takes off"       , "One Item of Clothing", "or drinks vodka"     ,  .counter = 0u,  .nude_level =   2u, .sexy_level = 0u, .gay_level = 0u  },  /* 3  */
+     {  "Kaisa takes off"       , "One Item of Clothing", "or drinks vodka"     ,  .counter = 0u,  .nude_level =   2u, .sexy_level = 0u, .gay_level = 0u  },  /* 3  */
+     {  "Kaisa takes off"       , "One Item of Clothing",          NULL         ,  .counter = 0u,  .nude_level =   3u, .sexy_level = 0u, .gay_level = 0u  },  /* 3  */
+     {  "Kaisa takes off"       , "One Item of Clothing",          NULL         ,  .counter = 0u,  .nude_level =   3u, .sexy_level = 0u, .gay_level = 0u  },  /* 3  */
+     {  "Kaisa exchanges"       , "One Item of Clothing","with one of the guys" ,  .counter = 0u,  .nude_level =   2u, .sexy_level = 1u, .gay_level = 0u  },  /* 3  */
+
+     {  "Kaisa must drink"      , "while twerking",                NULL         ,  .counter = 0u,  .nude_level =   0u, .sexy_level = 3u, .gay_level = 0u  },  /* 3  */
+
 
      {  "Kaisa can confiscate"  , "One Item of Clothing",          NULL       ,  .counter = 0u,  .nude_level =   3u, .sexy_level = 0u, .gay_level = 0u  },  /* 3  */
+     {  "Kaisa can confiscate"  , "One Item of Clothing",          NULL       ,  .counter = 0u,  .nude_level =   3u, .sexy_level = 0u, .gay_level = 0u  },  /* 3  */
+
      {  "Kaisa shall combine"   , "whipped cream and",     "making out"       ,  .counter = 0u,  .nude_level =   0u, .sexy_level = 2u, .gay_level = 0u  },  /* 3  */
      {  "Kaisa must make out"   , "with one other player", "(or several)"     ,  .counter = 0u,  .nude_level =   0u, .sexy_level = 3u, .gay_level = 0u  },  /* 3  */
 };
