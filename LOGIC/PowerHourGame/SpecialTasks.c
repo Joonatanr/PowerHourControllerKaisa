@@ -468,6 +468,9 @@ Private Task_T priv_TextArrayAllLevel3[] =
      {  "Everybody takes off"   , "two items of Clothing", "or drinks vodka"  ,  .counter = 0u,  .nude_level = 1u, .sexy_level = 0u, .gay_level = 0u  }, /* 3  */
      {  "Everybody takes off"   , "one item of Clothing",          NULL       ,  .counter = 0u,  .nude_level = 2u, .sexy_level = 0u, .gay_level = 0u  }, /* 3  */
      {  "Everybody takes off"   , "two Item of Clothing", "or drinks vodka"   ,  .counter = 0u,  .nude_level = 1u, .sexy_level = 0u, .gay_level = 0u  }, /* 3  */
+     {  "Whichever player wearing", "the most clothes, loses", "3 items of clothing"   ,  .counter = 0u,  .nude_level = 3u, .sexy_level = 0u, .gay_level = 0u  }, /* 3  */
+     {  "Whichever player wearing", "the most clothes, loses", "2 items of clothing"   ,  .counter = 0u,  .nude_level = 2u, .sexy_level = 0u, .gay_level = 0u  }, /* 3  */
+
      {  "Everybody takes off"   , "one items of Clothing",          NULL      ,  .counter = 0u,  .nude_level = 2u, .sexy_level = 0u, .gay_level = 0u  }, /* 3  */
      {  "Everybody takes off"   , "their shirts",                   NULL      ,  .counter = 0u,  .nude_level = 2u, .sexy_level = 0u, .gay_level = 0u  }, /* 3  */
      {  "Everybody takes off"   , "their pants",                    NULL      ,  .counter = 0u,  .nude_level = 3u, .sexy_level = 0u, .gay_level = 0u  }, /* 3  */
