@@ -54,10 +54,10 @@ Private const pot_conf_T priv_conf[NUMBER_OF_DEFINED_POTENTIOMETERS] =
       .input = {.port = GPIO_PORT_P4, .pin = GPIO_PIN1 },
       .leds =
       {
-        .led1 = {.port = GPIO_PORT_P4, .pin = GPIO_PIN6 },
-        .led2 = {.port = GPIO_PORT_P3, .pin = GPIO_PIN3 },
-        .led3 = {.port = GPIO_PORT_P3, .pin = GPIO_PIN2 },
-        .led4 = {.port = GPIO_PORT_P6, .pin = GPIO_PIN0 },
+        .led1 = {.port = GPIO_PORT_P8, .pin = GPIO_PIN5 },
+        .led2 = {.port = GPIO_PORT_P9, .pin = GPIO_PIN0 },
+        .led3 = {.port = GPIO_PORT_P8, .pin = GPIO_PIN4 },
+        .led4 = {.port = GPIO_PORT_P8, .pin = GPIO_PIN2 },
       },
       .adc_mem = ADC_MEM12,
       .adc_ch = ADC_INPUT_A12,
@@ -69,10 +69,10 @@ Private const pot_conf_T priv_conf[NUMBER_OF_DEFINED_POTENTIOMETERS] =
       .input = {.port = GPIO_PORT_P4, .pin = GPIO_PIN0 },
       .leds =
       {
-       .led1 = {.port = GPIO_PORT_P8, .pin = GPIO_PIN5 },
-       .led2 = {.port = GPIO_PORT_P9, .pin = GPIO_PIN0 },
-       .led3 = {.port = GPIO_PORT_P8, .pin = GPIO_PIN4 },
-       .led4 = {.port = GPIO_PORT_P9, .pin = GPIO_PIN2 },
+       .led1 = {.port = GPIO_PORT_P9, .pin = GPIO_PIN2 },
+       .led2 = {.port = GPIO_PORT_P6, .pin = GPIO_PIN2 },
+       .led3 = {.port = GPIO_PORT_P7, .pin = GPIO_PIN3 },
+       .led4 = {.port = GPIO_PORT_P7, .pin = GPIO_PIN1 },
       },
       .adc_mem = ADC_MEM13,
       .adc_ch = ADC_INPUT_A13,
@@ -84,10 +84,10 @@ Private const pot_conf_T priv_conf[NUMBER_OF_DEFINED_POTENTIOMETERS] =
       .input = {.port = GPIO_PORT_P4, .pin = GPIO_PIN5 },
       .leds =
       {
-       .led1 = {.port = GPIO_PORT_P8, .pin = GPIO_PIN6 },
-       .led2 = {.port = GPIO_PORT_P8, .pin = GPIO_PIN7 },
-       .led3 = {.port = GPIO_PORT_P9, .pin = GPIO_PIN1 },
-       .led4 = {.port = GPIO_PORT_P8, .pin = GPIO_PIN3 },
+       .led1 = {.port = GPIO_PORT_P9, .pin = GPIO_PIN4 },
+       .led2 = {.port = GPIO_PORT_P9, .pin = GPIO_PIN6 },
+       .led3 = {.port = GPIO_PORT_P8, .pin = GPIO_PIN0 },
+       .led4 = {.port = GPIO_PORT_P7, .pin = GPIO_PIN4 },
       },
       .adc_mem = ADC_MEM8,
       .adc_ch = ADC_INPUT_A8,
@@ -99,10 +99,10 @@ Private const pot_conf_T priv_conf[NUMBER_OF_DEFINED_POTENTIOMETERS] =
       .input = {.port = GPIO_PORT_P4, .pin = GPIO_PIN4 },
       .leds =
       {
-       .led1 = {.port = GPIO_PORT_P6, .pin = GPIO_PIN2 },
-       .led2 = {.port = GPIO_PORT_P7, .pin = GPIO_PIN3 },
-       .led3 = {.port = GPIO_PORT_P7, .pin = GPIO_PIN1 },
-       .led4 = {.port = GPIO_PORT_P9, .pin = GPIO_PIN4 },
+       .led1 = {.port = GPIO_PORT_P8, .pin = GPIO_PIN6 },
+       .led2 = {.port = GPIO_PORT_P8, .pin = GPIO_PIN7 },
+       .led3 = {.port = GPIO_PORT_P9, .pin = GPIO_PIN1 },
+       .led4 = {.port = GPIO_PORT_P8, .pin = GPIO_PIN3 },
       },
       .adc_mem = ADC_MEM9,
       .adc_ch = ADC_INPUT_A9,
