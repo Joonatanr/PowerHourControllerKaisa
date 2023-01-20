@@ -485,6 +485,7 @@ Private Task_T priv_TextArrayAllLevel3[] =
 
 
      {  "Everybody who has"     , "had sex today",                "drinks 3x" ,  .counter = 0u,  .nude_level = 0u, .sexy_level = 1u, .gay_level = 0u  }, /* 3  */
+
      {  "One round of rock"     , "paper scissors, losers", "lose 1 item of clothing" ,  .counter = 0u,  .nude_level = 2u, .sexy_level = 0u, .gay_level = 0u  }, /* 3  */
 
 
@@ -502,26 +503,25 @@ Private Task_T priv_TextArrayKaisaLevel3[] =
      {  "Kaisa must moan",        "between shots"       ,"and drink 3x"       ,  .counter = 0u,  .nude_level =   0u, .sexy_level = 1u, .gay_level = 0u  },  /* 3  */
      {  "Kaisa must extend tongue", "and have her shot" ,"poured in her mouth",  .counter = 0u,  .nude_level =   0u, .sexy_level = 2u, .gay_level = 0u  },  /* 3  */
 
-
      {  "Kaisa must drink while", "performing a "       ,      "lapdance"     ,  .counter = 0u,  .nude_level =   0u, .sexy_level = 3u, .gay_level = 0u  },  /* 3  */
      {  "Kaisa must drink while", "receiving a lapdance from", "player of her choice",  .counter = 0u,  .nude_level =   0u, .sexy_level = 3u, .gay_level = 0u  },  /* 3  */
 
      {  "Kaisa must make out"   , "with one other player", "(or several)"     ,  .counter = 0u,  .nude_level =   0u, .sexy_level = 2u, .gay_level = 0u  },  /* 3  */
      {  "Kaisa must choose 1"   , "player who will", "spank her 3 times"      ,  .counter = 0u,  .nude_level =   0u, .sexy_level = 1u, .gay_level = 0u  },  /* 3  */
 
-     {  "Kaisa must remove"     , "1 item of clothing",            NULL       ,  .counter = 0u, .nude_level = 2u, .sexy_level = 0u, .gay_level = 0u      }, /* 3  */
-     {  "Kaisa must remove"     , "1 item of clothing",            NULL       ,  .counter = 0u, .nude_level = 2u, .sexy_level = 0u, .gay_level = 0u      }, /* 3  */
-     {  "Kaisa must remove"     , "1 item of clothing",            NULL       ,  .counter = 0u, .nude_level = 2u, .sexy_level = 0u, .gay_level = 0u      }, /* 3  */
-     {  "Kaisa must remove"     , "1 item of clothing",            NULL       ,  .counter = 0u, .nude_level = 2u, .sexy_level = 0u, .gay_level = 0u      }, /* 3  */
+     {  "Kaisa must remove"     , "1 item of clothing",            NULL       ,  .counter = 0u, .nude_level = 2u, .sexy_level = 0u, .gay_level = 0u     }, /* 3  */
+     {  "Kaisa must remove"     , "1 item of clothing",            NULL       ,  .counter = 0u, .nude_level = 2u, .sexy_level = 0u, .gay_level = 0u     }, /* 3  */
+     {  "Kaisa must remove"     , "1 item of clothing",            NULL       ,  .counter = 0u, .nude_level = 2u, .sexy_level = 0u, .gay_level = 0u     }, /* 3  */
+     {  "Kaisa must remove"     , "1 item of clothing",            NULL       ,  .counter = 0u, .nude_level = 2u, .sexy_level = 0u, .gay_level = 0u     }, /* 3  */
 
-     {  "Kaisa can confiscate"  , "1 item of clothing",            NULL       ,  .counter = 0u, .nude_level = 2u, .sexy_level = 0u, .gay_level = 0u      }, /* 3  */
-     {  "Kaisa can confiscate"  , "1 item of clothing",            NULL       ,  .counter = 0u, .nude_level = 2u, .sexy_level = 0u, .gay_level = 0u      }, /* 3  */
-     {  "Kaisa can confiscate"  , "somebody's pants",              NULL       ,  .counter = 0u, .nude_level = 3u, .sexy_level = 0u, .gay_level = 0u      }, /* 3  */
+     {  "Kaisa can confiscate"  , "1 item of clothing",            NULL       ,  .counter = 0u, .nude_level = 2u, .sexy_level = 0u, .gay_level = 0u     }, /* 3  */
+     {  "Kaisa can confiscate"  , "1 item of clothing",            NULL       ,  .counter = 0u, .nude_level = 2u, .sexy_level = 0u, .gay_level = 0u     }, /* 3  */
+     {  "Kaisa can confiscate"  , "somebody's pants",              NULL       ,  .counter = 0u, .nude_level = 3u, .sexy_level = 0u, .gay_level = 0u     }, /* 3  */
 
-
-     {  "Kaisa must make a"      ,  " toast to ",            "1 guys' penis!"  ,  .counter = 0u, .nude_level = 0u, .sexy_level = 1u, .gay_level = 0u      }, /* 3  */
-     {  "Kaisa must get creative",  "with whipped cream", "for next 60 seconds",  .counter = 0u, .nude_level = 0u, .sexy_level = 1u, .gay_level = 0u      }, /* 3  */
-     {  "Kaisa chooses player",     "who will take a ",     "bodyshot from her",  .counter = 0u, .nude_level = 0u, .sexy_level = 2u, .gay_level = 0u      }, /* 3  */
+     {  "Kaisa must make a"      ,  " toast to ",            "1 guys' penis!"  ,  .counter = 0u, .nude_level = 0u, .sexy_level = 1u, .gay_level = 0u    }, /* 3  */
+     {  "Kaisa must get creative",  "with whipped cream", "for next 60 seconds",  .counter = 0u, .nude_level = 0u, .sexy_level = 1u, .gay_level = 0u    }, /* 3  */
+     {  "Kaisa chooses player",     "who will take a ",     "bodyshot from her",  .counter = 0u, .nude_level = 0u, .sexy_level = 2u, .gay_level = 0u    }, /* 3  */
+     {  "Everybody who has"     , "seen Kaisa naked",             "drinks 3x" ,  .counter = 0u,  .nude_level = 0u, .sexy_level = 1u, .gay_level = 0u    }, /* 3  */
 
 };
 
