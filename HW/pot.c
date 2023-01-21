@@ -239,7 +239,7 @@ Public void pot_cyclic_10ms(void)
         {
             if (adc_value >= priv_pot_ranges[ix].lower_range && adc_value <= priv_pot_ranges[ix].upper_range)
             {
-                measured_range = ix;
+                measured_range = (NUMBER_OF_POT_RANGES -1u) - ix;
                 break;
             }
         }
