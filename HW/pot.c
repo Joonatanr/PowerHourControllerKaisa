@@ -156,10 +156,10 @@ Private const pot_conf_T priv_conf[NUMBER_OF_DEFINED_POTENTIOMETERS] =
 /* ADC value is 14 bit, so between 0 and 16384 , 4096 per quadrant*/
 Private const pot_range_T priv_pot_ranges[NUMBER_OF_POT_RANGES] =
 {
-     { .lower_range = 12288u + HYSTERESIS_VALUE,  .upper_range = 0x4000u                     },
-     { .lower_range = 8192u  + HYSTERESIS_VALUE,  .upper_range = 12287u - HYSTERESIS_VALUE   },
-     { .lower_range = 4096u  + HYSTERESIS_VALUE,  .upper_range = 8193u  - HYSTERESIS_VALUE   },
-     { .lower_range = 0u,                         .upper_range = 4095u  - HYSTERESIS_VALUE   }
+     { .lower_range = 5500u  + HYSTERESIS_VALUE,  .upper_range = 0x4000u                     },
+     { .lower_range = 3667u  + HYSTERESIS_VALUE,  .upper_range = 5499u - HYSTERESIS_VALUE   },
+     { .lower_range = 1833u  + HYSTERESIS_VALUE,  .upper_range = 3666u  - HYSTERESIS_VALUE   },
+     { .lower_range = 0u,                         .upper_range = 1832u  - HYSTERESIS_VALUE   }
 };
 
 
