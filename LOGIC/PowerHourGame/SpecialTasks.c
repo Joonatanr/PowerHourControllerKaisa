@@ -72,9 +72,9 @@ Private Boolean isTaskEnabled(const Task_T * task_ptr, U8 sexy_level, U8 nude_le
 Private const SpecialTaskFunc priv_special_tasks_girls_array[] =
 {
   &SpecialTaskWithRandomText,
+  &SpecialTaskWithRandomText,
+  &SpecialTaskWithRandomText,
   &DrinkTwiceTask,
-  &SpecialTaskWithRandomText,
-  &SpecialTaskWithRandomText,
   &SpecialTaskWithRandomText,
   &SpecialTaskWithRandomText,
   &SpecialTaskWithRandomText,
@@ -95,18 +95,18 @@ Private const SpecialTaskFunc priv_special_tasks_guys_array[] =
 Private const SpecialTaskFunc priv_special_tasks_everybody_array[] =
 {
   &SpecialTaskWithRandomText,
+  &SpecialTaskWithRandomText,
+  &SpecialTaskWithRandomText,
+  &SpecialTaskWithRandomText,
+  &SpecialTaskWithRandomText,
+  &SpecialTaskWithRandomText,
   &DrinkTwiceTask,
-  &SpecialTaskWithRandomText,
-  &SpecialTaskWithRandomText,
-  &SpecialTaskWithRandomText,
-  &SpecialTaskWithRandomText,
-  &SpecialTaskWithRandomText,
 };
 
 Private const SpecialTaskFunc priv_special_tasks_kaisa_array[] =
 {
   &SpecialTaskWithRandomText,
-  &DrinkTwiceTask,
+  &SpecialTaskWithRandomText,
   &SpecialTaskWithRandomText,
   &SpecialTaskWithRandomText,
   &DrinkWaterTask,

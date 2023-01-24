@@ -53,10 +53,10 @@ Private void display_empty(void);
  *
  *****************************************************************************************************/
 
-Private U8 priv_display_buffer[NUMBER_OF_COLUMNS][NUMBER_OF_PAGES];
-Private U8 priv_split_buffer[NUMBER_OF_COLUMNS]; //Used for splitting image data between pages.
+Private U8 priv_display_buffer[DISPLAY_NUMBER_OF_COLUMNS][DISPLAY_NUMBER_OF_PAGES];
+Private U8 priv_split_buffer[DISPLAY_NUMBER_OF_COLUMNS]; //Used for splitting image data between pages.
 
-Private U16 priv_page_validity_bits[NUMBER_OF_PAGES]; //Each page is divided into 16 virtual segments.
+Private U16 priv_page_validity_bits[DISPLAY_NUMBER_OF_PAGES]; //Each page is divided into 16 virtual segments.
 Private Boolean priv_is_locked = FALSE;
 
 //Display patterns.
@@ -158,7 +158,7 @@ Public void display_cyclic_50msec(void)
     U8 page, column, seg, prev_column;
     if (isDisplayReady && !priv_is_locked)
     {
-        for (page = 0u; page < NUMBER_OF_PAGES; page++)
+        for (page = 0u; page < DISPLAY_NUMBER_OF_PAGES; page++)
         {
             if (priv_page_validity_bits[page] > 0u)
             {
@@ -366,7 +366,7 @@ Public void display_fillRectangle(U16 x, U16 y, U16 height, U16 width, FillPatte
 Public void display_drawRectangle(U16 x, U16 y, U16 height, U16 width, U8 borderWidth)
 {
     /* 1. Sanity check */
-    if ((x > NUMBER_OF_COLUMNS) || (y > NUMBER_OF_ROWS))
+    if ((x > DISPLAY_NUMBER_OF_COLUMNS) || (y > DISPLAY_NUMBER_OF_ROWS))
     {
         return;
     }
@@ -425,10 +425,10 @@ Public void display_drawRectangle(U16 x, U16 y, U16 height, U16 width, U8 border
 Public void display_clear(void)
 {
     U8 x, y;
-    for (x = 0u; x < NUMBER_OF_PAGES; x++)
+    for (x = 0u; x < DISPLAY_NUMBER_OF_PAGES; x++)
     {
         priv_page_validity_bits[x] = (U16)0xffffu; //Invalidate whole display.
-        for(y = 0u; y < NUMBER_OF_COLUMNS; y++)
+        for(y = 0u; y < DISPLAY_NUMBER_OF_COLUMNS; y++)
         {
             priv_display_buffer[y][x] = 0x00u;
         }
@@ -439,7 +439,7 @@ Public void display_clear(void)
 /* Sets or clears a single pixel. */
 Public void display_setPixel(U8 x, U8 y, Boolean val)
 {
-    if ((x < NUMBER_OF_COLUMNS) && (y < NUMBER_OF_ROWS))
+    if ((x < DISPLAY_NUMBER_OF_COLUMNS) && (y < DISPLAY_NUMBER_OF_ROWS))
     {
         U8 page = y >> 3u;
         U8 bit = y % 8u;
@@ -464,10 +464,10 @@ Public void display_setPixel(U8 x, U8 y, Boolean val)
 Public void display_drawLine(Point begin, Point end, Boolean isBlack)
 {
 
-    if (begin.x >= NUMBER_OF_COLUMNS ||
-        begin.y >= NUMBER_OF_ROWS    ||
-        end.x >= NUMBER_OF_COLUMNS   ||
-        end.y >= NUMBER_OF_ROWS)
+    if (begin.x >= DISPLAY_NUMBER_OF_COLUMNS ||
+        begin.y >= DISPLAY_NUMBER_OF_ROWS    ||
+        end.x >= DISPLAY_NUMBER_OF_COLUMNS   ||
+        end.y >= DISPLAY_NUMBER_OF_ROWS)
     {
         return;
     }
@@ -574,7 +574,7 @@ Private void drawPattern(Point * p, Size * s, const FillPattern * pattern_ptr)
 
     data = pattern_ptr->pattern;
 
-    if ((p->x < NUMBER_OF_COLUMNS) && (p->y < NUMBER_OF_ROWS))
+    if ((p->x < DISPLAY_NUMBER_OF_COLUMNS) && (p->y < DISPLAY_NUMBER_OF_ROWS))
     {
         bottom_row = p->y + s->height - 1;
         right_column = p->x + s->width - 1;
@@ -582,14 +582,14 @@ Private void drawPattern(Point * p, Size * s, const FillPattern * pattern_ptr)
         bottom_page = bottom_row >> 3u; //Divide with 8
         top_page = p->y >> 3u; //Divide with 8
 
-        if (bottom_page >= NUMBER_OF_PAGES )
+        if (bottom_page >= DISPLAY_NUMBER_OF_PAGES )
         {
-            bottom_page = NUMBER_OF_PAGES - 1;
+            bottom_page = DISPLAY_NUMBER_OF_PAGES - 1;
         }
 
-        if (right_column >= NUMBER_OF_COLUMNS)
+        if (right_column >= DISPLAY_NUMBER_OF_COLUMNS)
         {
-            right_column = NUMBER_OF_COLUMNS - 1;
+            right_column = DISPLAY_NUMBER_OF_COLUMNS - 1;
         }
 
         left_segment = GET_SEGMENT(p->x);
@@ -646,7 +646,7 @@ Private void drawImage(Point * p, Size * s, const Bitmap * bmp, Boolean isInvert
     //We start drawing a bitmap.
     data = bmp->bmp_data;
 
-    if ((p->x < NUMBER_OF_COLUMNS) && (p->y < NUMBER_OF_ROWS))
+    if ((p->x < DISPLAY_NUMBER_OF_COLUMNS) && (p->y < DISPLAY_NUMBER_OF_ROWS))
     {
         bottom_row = p->y + s->height - 1;
         right_column = p->x + s->width - 1;
@@ -654,14 +654,14 @@ Private void drawImage(Point * p, Size * s, const Bitmap * bmp, Boolean isInvert
         bottom_page = bottom_row >> 3u; //Divide with 8
         top_page = p->y >> 3u; //Divide with 8
 
-        if (bottom_page >= NUMBER_OF_PAGES )
+        if (bottom_page >= DISPLAY_NUMBER_OF_PAGES )
         {
-            bottom_page = NUMBER_OF_PAGES - 1;
+            bottom_page = DISPLAY_NUMBER_OF_PAGES - 1;
         }
 
-        if (right_column >= NUMBER_OF_COLUMNS)
+        if (right_column >= DISPLAY_NUMBER_OF_COLUMNS)
         {
-            right_column = NUMBER_OF_COLUMNS - 1;
+            right_column = DISPLAY_NUMBER_OF_COLUMNS - 1;
         }
 
         left_segment = GET_SEGMENT(p->x);
@@ -680,7 +680,7 @@ Private void drawImage(Point * p, Size * s, const Bitmap * bmp, Boolean isInvert
             if (curr_page == bottom_page)
             {
                 //We do not need to mask, if the bitmap is out of bounds.
-                if (bottom_row < NUMBER_OF_ROWS)
+                if (bottom_row < DISPLAY_NUMBER_OF_ROWS)
                 {
                     mask &= (0xffu >> (7u - (bottom_row % 8u)));
                 }
@@ -765,11 +765,11 @@ Private void display_empty(void)
     U8 ix;
     U8 yx;
 
-    for (ix = 0u; ix < NUMBER_OF_PAGES; ix++)
+    for (ix = 0u; ix < DISPLAY_NUMBER_OF_PAGES; ix++)
     {
         set_page_address(ix);
         set_column(0);
-        for (yx = 0u; yx < NUMBER_OF_COLUMNS; yx++)
+        for (yx = 0u; yx < DISPLAY_NUMBER_OF_COLUMNS; yx++)
         {
             write_data(0xffu);
         }

@@ -96,10 +96,20 @@ typedef struct
     Boolean is_enabled;
 } SchedulerTaskState_T;
 
-//Just an idea.
+
+typedef enum
+{
+    BMP_ALIGNMENT_NONE,
+    BMP_ALIGNMENT_RIGHT,
+    BMP_ALIGNMENT_LEFT,
+
+    NUMBER_OF_BMP_ALIGNMENTS
+} BitmapAlignment;
+
 typedef struct
 {
     const Bitmap * bmp_ptr;
+    BitmapAlignment alignment;
     U8 bmp_x;
     U8 bmp_y;
 
@@ -122,6 +132,7 @@ Private void convertTimerString(timekeeper_struct * t, char * dest_str);
 Private void drawBeerShot(beerShotAction action);
 
 Private Boolean genericIntroFunction(const IntroSequence * intro_ptr, U8 sec);
+Private void drawTaskBitmap(const Bitmap * bmp_ptr, BitmapAlignment alignment, U8 x, U8 y, Boolean isInverted);
 
 Private Boolean girlsSpecialIntro(U8 sec);
 Private Boolean guysSpecialIntro(U8 sec);
@@ -229,7 +240,7 @@ Private Rectangle priv_timer_rect;
 Private OverrideFunc priv_override_ptr;
 Private char priv_timer_str[10];
 Private U8 priv_override_counter;
-Private U8 priv_task_frequency = 3u; /* Default value is a task every 3 minutes. */
+Private U8 priv_task_frequency = 2u; /* Default value is a task every 2 minutes. */
 Private Boolean priv_isFirstRun = TRUE;
 
 /*****************************************************************************************************
@@ -250,7 +261,7 @@ Public void clockDisplay_init(void)
 
     priv_timer_rect.location.x = 1u;
 
-    priv_timer_rect.location.y = NUMBER_OF_ROWS >> 1u; //Divide by 2.
+    priv_timer_rect.location.y = DISPLAY_NUMBER_OF_ROWS >> 1u; //Divide by 2.
     priv_timer_rect.location.y -= (font_height >> 1u);
 
     priv_timer_rect.size.height = font_height;
@@ -334,7 +345,7 @@ Public void clockDisplay_cyclic1000msec(void)
         priv_state = CONTROLLER_WARNING_CONFIRM;
         break;
     case CONTROLLER_WARNING_CONFIRM:
-        if (priv_safety_button_timer > 10u )
+        if (priv_safety_button_timer > 5u )
         {
             display_clear();
             priv_state = CONTROLLER_COUNTING;
@@ -667,7 +678,8 @@ Private Boolean genericIntroFunction(const IntroSequence * intro_ptr, U8 sec)
     {
     case(1u):
         display_clear();
-        display_drawBitmap(intro_ptr->bmp_ptr, intro_ptr->bmp_x, intro_ptr->bmp_y, intro_ptr->isInverted);
+        //display_drawBitmap(intro_ptr->bmp_ptr, intro_ptr->bmp_x, intro_ptr->bmp_y, intro_ptr->isInverted);
+        drawTaskBitmap(intro_ptr->bmp_ptr, intro_ptr->alignment, intro_ptr->bmp_x, intro_ptr->bmp_y, intro_ptr->isInverted);
         break;
     case(2u):
         display_drawString(intro_ptr->text_str, intro_ptr->text_x, intro_ptr->text_y, intro_ptr->text_font, FALSE);
@@ -683,21 +695,39 @@ Private Boolean genericIntroFunction(const IntroSequence * intro_ptr, U8 sec)
 }
 
 
+Private void drawTaskBitmap(const Bitmap * bmp_ptr, BitmapAlignment alignment, U8 x, U8 y, Boolean isInverted)
+{
+    switch(alignment)
+    {
+        case BMP_ALIGNMENT_RIGHT:
+            display_drawBitmap(bmp_ptr, DISPLAY_NUMBER_OF_COLUMNS - bmp_ptr->width, y, isInverted);
+            break;
+        case BMP_ALIGNMENT_LEFT:
+            display_drawBitmap(bmp_ptr, 0u, y, isInverted);
+            break;
+        case BMP_ALIGNMENT_NONE:
+        default:
+            display_drawBitmap(bmp_ptr, x, y, isInverted);
+            break;
+    }
+}
+
+
 Private const IntroSequence priv_guys_intros[] =
 {
-     {.bmp_ptr = &strong_dude_bitmap, .bmp_x = 0u, .bmp_y = 0u, .text_str = "Guys Round!", .text_x = 58u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = FALSE },
-     {.bmp_ptr = &chad_bitmap,        .bmp_x = 0u, .bmp_y = 0u, .text_str = "Guys Round!", .text_x = 50u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = FALSE },
-     {.bmp_ptr = &man3_bitmap,        .bmp_x = 0u, .bmp_y = 0u, .text_str = "Guys Round!", .text_x = 20u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = TRUE  },
-     {.bmp_ptr = &dude4_bitmap,       .bmp_x = 0u, .bmp_y = 0u, .text_str = "Guys Round!", .text_x = 50u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = TRUE  },
+     {.bmp_ptr = &strong_dude_bitmap, .alignment = BMP_ALIGNMENT_NONE,  .bmp_x = 0u, .bmp_y = 0u, .text_str = "Guys Round!", .text_x = 58u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = FALSE },
+     {.bmp_ptr = &chad_bitmap,        .alignment = BMP_ALIGNMENT_NONE,  .bmp_x = 0u, .bmp_y = 0u, .text_str = "Guys Round!", .text_x = 50u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = FALSE },
+     {.bmp_ptr = &man3_bitmap,        .alignment = BMP_ALIGNMENT_NONE,  .bmp_x = 0u, .bmp_y = 0u, .text_str = "Guys Round!", .text_x = 20u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = TRUE  },
+     {.bmp_ptr = &dude4_bitmap,       .alignment = BMP_ALIGNMENT_NONE,  .bmp_x = 0u, .bmp_y = 0u, .text_str = "Guys Round!", .text_x = 50u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = TRUE  },
 };
 
 /* These only to be used at maximum Sexyness level :D */
 Private const IntroSequence priv_hot_guys_intros[] =
 {
-     {.bmp_ptr = &male_stripper1_bmp, .bmp_x = 32u, .bmp_y = 0u, .text_str = "Guys Round!", .text_x = 0u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = FALSE },
-     {.bmp_ptr = &male_stripper2_bmp, .bmp_x = 32u, .bmp_y = 0u, .text_str = "Guys Round!", .text_x = 0u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = FALSE },
-     {.bmp_ptr = &male_stripper3_bmp, .bmp_x = 32u, .bmp_y = 0u, .text_str = "Guys Round!", .text_x = 0u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = FALSE },
-     {.bmp_ptr = &male_stripper5_bmp, .bmp_x = 32u, .bmp_y = 0u, .text_str = "Guys Round!", .text_x = 0u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = FALSE },
+     {.bmp_ptr = &male_stripper1_bmp, .alignment = BMP_ALIGNMENT_RIGHT,  .bmp_x = 32u, .bmp_y = 0u, .text_str = "Guys Round!", .text_x = 0u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = TRUE },
+     {.bmp_ptr = &male_stripper2_bmp, .alignment = BMP_ALIGNMENT_RIGHT,  .bmp_x = 32u, .bmp_y = 0u, .text_str = "Guys Round!", .text_x = 0u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = TRUE },
+     {.bmp_ptr = &male_stripper3_bmp, .alignment = BMP_ALIGNMENT_RIGHT,  .bmp_x = 32u, .bmp_y = 0u, .text_str = "Guys Round!", .text_x = 0u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = TRUE },
+     {.bmp_ptr = &male_stripper5_bmp, .alignment = BMP_ALIGNMENT_RIGHT,  .bmp_x = 32u, .bmp_y = 0u, .text_str = "Guys Round!", .text_x = 0u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = TRUE },
 
 };
 
@@ -743,23 +773,23 @@ Private Boolean guysSpecialIntro(U8 sec)
 /* These only to be used at maximum Sexyness level :D */
 Private const IntroSequence priv_hot_girls_intros[] =
 {
-     {.bmp_ptr = &hot_girl1_bitmap, .bmp_x = 32u, .bmp_y = 0u, .text_str = "Girls Round!", .text_x = 0u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = FALSE },
-     {.bmp_ptr = &hot_girl2_bitmap, .bmp_x = 32u, .bmp_y = 0u, .text_str = "Girls Round!", .text_x = 0u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = FALSE },
-     {.bmp_ptr = &hot_girl3_bitmap, .bmp_x = 32u, .bmp_y = 0u, .text_str = "Girls Round!", .text_x = 0u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = FALSE },
-     {.bmp_ptr = &kiss_bitmap,      .bmp_x = 10u, .bmp_y = 0u, .text_str = "Girls Round!", .text_x = 0u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = FALSE },
-     {.bmp_ptr = &kinky_bitmap,     .bmp_x = 10u, .bmp_y = 0u, .text_str = "Girls Round!", .text_x = 0u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = FALSE },
-     {.bmp_ptr = &kinky2_bitmap,    .bmp_x = 63u, .bmp_y = 0u, .text_str = "Girls Round!", .text_x = 0u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = FALSE },
-     {.bmp_ptr = &kiss2_bitmap,     .bmp_x = 28u, .bmp_y = 0u, .text_str = "Girls Round!", .text_x = 0u, .text_y = 50u,.text_font = FONT_MEDIUM_FONT , .isInverted = FALSE },
+     {.bmp_ptr = &hot_girl1_bitmap, .alignment = BMP_ALIGNMENT_RIGHT,    .bmp_x = 32u, .bmp_y = 0u, .text_str = "Girls Round!", .text_x = 0u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = TRUE },
+     {.bmp_ptr = &hot_girl2_bitmap, .alignment = BMP_ALIGNMENT_RIGHT,    .bmp_x = 32u, .bmp_y = 0u, .text_str = "Girls Round!", .text_x = 0u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = TRUE },
+     {.bmp_ptr = &hot_girl3_bitmap, .alignment = BMP_ALIGNMENT_RIGHT,    .bmp_x = 32u, .bmp_y = 0u, .text_str = "Girls Round!", .text_x = 0u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = TRUE },
+     {.bmp_ptr = &kiss_bitmap,      .alignment = BMP_ALIGNMENT_RIGHT,    .bmp_x = 10u, .bmp_y = 0u, .text_str = "Girls Round!", .text_x = 0u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = TRUE },
+     {.bmp_ptr = &kinky_bitmap,     .alignment = BMP_ALIGNMENT_RIGHT,    .bmp_x = 10u, .bmp_y = 0u, .text_str = "Girls Round!", .text_x = 0u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = TRUE },
+     {.bmp_ptr = &kinky2_bitmap,    .alignment = BMP_ALIGNMENT_RIGHT,    .bmp_x = 63u, .bmp_y = 0u, .text_str = "Girls Round!", .text_x = 0u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = TRUE },
+     {.bmp_ptr = &kiss2_bitmap,     .alignment = BMP_ALIGNMENT_RIGHT,    .bmp_x = 28u, .bmp_y = 0u, .text_str = "Girls Round!", .text_x = 0u, .text_y = 50u,.text_font = FONT_MEDIUM_FONT , .isInverted = TRUE },
 };
 
 
 Private const IntroSequence priv_girl_intros[] =
 {
-     { .bmp_ptr = &girl_1_bitmap,        .bmp_x = 0u, .bmp_y = 0u, .text_str = "Girls round!", .text_x = 50u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = FALSE},
-     { .bmp_ptr = &girl_2_bitmap,        .bmp_x = 6u, .bmp_y = 0u, .text_str = "Girls round!", .text_x = 50u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = FALSE},
-     { .bmp_ptr = &girl_3_bitmap,        .bmp_x = 6u, .bmp_y = 0u, .text_str = "Girls round!", .text_x = 50u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT, .isInverted = TRUE },
-     { .bmp_ptr = &girl_9_bitmap,        .bmp_x = 0u, .bmp_y = 0u, .text_str = "Girls round!", .text_x = 50u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT, .isInverted = TRUE },
-     { .bmp_ptr = &girl_Sasha_bitmap,    .bmp_x = 0u, .bmp_y = 0u, .text_str = "Girls round!", .text_x = 10u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT, .isInverted = TRUE },
+     { .bmp_ptr = &girl_1_bitmap,       .alignment = BMP_ALIGNMENT_NONE, .bmp_x = 0u, .bmp_y = 0u, .text_str = "Girls round!", .text_x = 50u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = FALSE},
+     { .bmp_ptr = &girl_2_bitmap,       .alignment = BMP_ALIGNMENT_NONE, .bmp_x = 6u, .bmp_y = 0u, .text_str = "Girls round!", .text_x = 50u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = FALSE},
+     { .bmp_ptr = &girl_3_bitmap,       .alignment = BMP_ALIGNMENT_NONE, .bmp_x = 6u, .bmp_y = 0u, .text_str = "Girls round!", .text_x = 50u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT, .isInverted = TRUE },
+     { .bmp_ptr = &girl_9_bitmap,       .alignment = BMP_ALIGNMENT_NONE, .bmp_x = 0u, .bmp_y = 0u, .text_str = "Girls round!", .text_x = 50u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT, .isInverted = TRUE },
+     { .bmp_ptr = &girl_Sasha_bitmap,   .alignment = BMP_ALIGNMENT_NONE, .bmp_x = 0u, .bmp_y = 0u, .text_str = "Girls round!", .text_x = 10u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT, .isInverted = TRUE },
 };
 
 //We start displaying a special task.
@@ -803,8 +833,8 @@ Private Boolean girlsSpecialIntro(U8 sec)
 
 Private const IntroSequence priv_common_intros[] =
 {
-     { .bmp_ptr = &two_beers_prosit_bitmap, .bmp_x = 31u, .bmp_y = 0u, .text_str = "Task for all!", .text_x = 50u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = FALSE},
-     { .bmp_ptr = &one_large_beer_bitmap,   .bmp_x = 34u, .bmp_y = 0u, .text_str = "Task for all!", .text_x = 50u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = FALSE},
+     { .bmp_ptr = &two_beers_prosit_bitmap, .alignment = BMP_ALIGNMENT_RIGHT, .bmp_x = 31u, .bmp_y = 0u, .text_str = "Task for all!", .text_x = 50u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = TRUE},
+     { .bmp_ptr = &one_large_beer_bitmap,   .alignment = BMP_ALIGNMENT_RIGHT, .bmp_x = 34u, .bmp_y = 0u, .text_str = "Task for all!", .text_x = 50u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = TRUE},
 };
 
 Private Boolean EverybodySpecialIntro(U8 sec)
@@ -827,9 +857,9 @@ Private Boolean EverybodySpecialIntro(U8 sec)
 
 Private const IntroSequence priv_kaisa_intros[] =
 {
-     { .bmp_ptr = &kaisa_bitmap,            .bmp_x = 61u, .bmp_y = 0u, .text_str = "Kaisa's round!", .text_x = 50u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = FALSE},
-     { .bmp_ptr = &kaisa_message_bitmap,    .bmp_x = 41u, .bmp_y = 0u, .text_str = "Kaisa's round!", .text_x = 50u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = FALSE},
-     { .bmp_ptr = &kaisa_w_laudur_bitmap,   .bmp_x = 33u, .bmp_y = 0u, .text_str = "Kaisa's round!", .text_x = 50u, .text_y = 4u, .text_font = FONT_MEDIUM_FONT , .isInverted = FALSE},
+     { .bmp_ptr = &kaisa_bitmap,           .alignment = BMP_ALIGNMENT_RIGHT, .bmp_x = 61u, .bmp_y = 0u, .text_str = "Kaisa's round!", .text_x = 0u, .text_y = 50u, .text_font = FONT_MEDIUM_FONT , .isInverted = TRUE},
+     { .bmp_ptr = &kaisa_message_bitmap,   .alignment = BMP_ALIGNMENT_RIGHT, .bmp_x = 41u, .bmp_y = 0u, .text_str = "Kaisa's round!", .text_x = 0u, .text_y = 50u, .text_font = FONT_MEDIUM_FONT , .isInverted = TRUE},
+     { .bmp_ptr = &kaisa_w_laudur_bitmap,  .alignment = BMP_ALIGNMENT_RIGHT, .bmp_x = 33u, .bmp_y = 0u, .text_str = "Kaisa's round!", .text_x = 0u, .text_y = 50u, .text_font = FONT_MEDIUM_FONT , .isInverted = TRUE},
 
 
 };

@@ -232,10 +232,6 @@ Private void dedication_start(void)
     display_drawString("as a parting gift, to be enjoyed",  0u, 47u, FONT_ARIAL_TINY, FALSE);
     display_drawString("in the land Down Under",            0u, 56u, FONT_ARIAL_TINY, FALSE);
 
-    /* Lets draw the <sigh> ä signs */
-    display_setPixel(22u, 47u, TRUE);
-    display_setPixel(24u, 47u, TRUE);
-
     /* Basically we wait for ANY key to be pressed. */
     buttons_subscribeListener(UP_BUTTON,    dedicationExitListener);
     buttons_subscribeListener(DOWN_BUTTON,  dedicationExitListener);

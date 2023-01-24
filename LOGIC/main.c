@@ -63,7 +63,7 @@ Private void showDedicationText(void);
 Public TimerHandler timer_10msec_callback = timer_hi_prio;
 Public TimerHandler timer_50msec_callback = timer_lo_prio;
 
-Private const char priv_version_string[] = "Machine 3.1";
+Private const char priv_version_string[] = "Machine 3.2";
 
 
 /* Settings Menu Items */

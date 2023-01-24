@@ -108,7 +108,7 @@ Private void drawMenu(SelectionMenu * menu)
     font_height = font_getFontHeight(MENU_FONT);
 
     height = (font_height + 2u) * menu->number_of_items;
-    ypos = (NUMBER_OF_ROWS >> 1u) - (height >> 1u);
+    ypos = (DISPLAY_NUMBER_OF_ROWS >> 1u) - (height >> 1u);
 
     for (x = 0u; x < menu->number_of_items; x++)
     {

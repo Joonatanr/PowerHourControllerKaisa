@@ -103,7 +103,7 @@ Private Rectangle priv_xRect =
      },
      .size =
      {
-       .width = NUMBER_OF_COLUMNS - GAME_BORDER_AREA_X_PX - 2u,
+       .width = DISPLAY_NUMBER_OF_COLUMNS - GAME_BORDER_AREA_X_PX - 2u,
        .height = 43u
      }
 };
@@ -309,11 +309,11 @@ Private void drawBackGround(void)
     pointsRectangle.location.y = 2u;
 
     pointsRectangle.size.height = 16u;
-    pointsRectangle.size.width = NUMBER_OF_COLUMNS - GAME_BORDER_AREA_X_PX - 2u;
+    pointsRectangle.size.width = DISPLAY_NUMBER_OF_COLUMNS - GAME_BORDER_AREA_X_PX - 2u;
 
     display_drawTextBox(&pointsRectangle, "000", FONT_SMALL_FONT);
 
-    display_drawRectangle(GAME_BORDER_AREA_X_PX, 0u, 64u, NUMBER_OF_COLUMNS - GAME_BORDER_AREA_X_PX, 1u);
+    display_drawRectangle(GAME_BORDER_AREA_X_PX, 0u, 64u, DISPLAY_NUMBER_OF_COLUMNS - GAME_BORDER_AREA_X_PX, 1u);
 }
 
 

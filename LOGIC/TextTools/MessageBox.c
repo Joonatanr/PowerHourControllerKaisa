@@ -52,7 +52,7 @@ Private Rectangle priv_msg_box;
 
 /* Variables for storing previously displayed image. */
 /* TODO : Implement this. */
-Private U8 priv_prev_image_data[NUMBER_OF_COLUMNS * NUMBER_OF_PAGES];
+Private U8 priv_prev_image_data[DISPLAY_NUMBER_OF_COLUMNS * DISPLAY_NUMBER_OF_PAGES];
 
 Private Bitmap priv_prev_image =
 {
@@ -183,11 +183,11 @@ Private void drawMessageBox(const char * text, Boolean includeButtonArea)
         rectSize.height += BUTTON_AREA_HEIGHT;
     }
 
-    rectSize.height = MIN(rectSize.height, NUMBER_OF_ROWS);
-    rectSize.width = MIN(rectSize.width, NUMBER_OF_COLUMNS);
+    rectSize.height = MIN(rectSize.height, DISPLAY_NUMBER_OF_ROWS);
+    rectSize.width = MIN(rectSize.width, DISPLAY_NUMBER_OF_COLUMNS);
 
-    rectLocation.x = GET_X_FROM_CENTER(NUMBER_OF_COLUMNS / 2, rectSize.width);
-    rectLocation.y = GET_Y_FROM_CENTER(NUMBER_OF_ROWS / 2, rectSize.height);
+    rectLocation.x = GET_X_FROM_CENTER(DISPLAY_NUMBER_OF_COLUMNS / 2, rectSize.width);
+    rectLocation.y = GET_Y_FROM_CENTER(DISPLAY_NUMBER_OF_ROWS / 2, rectSize.height);
 
     box.location = rectLocation;
     box.size = rectSize;
